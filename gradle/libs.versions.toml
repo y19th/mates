@@ -1,0 +1,68 @@
+[versions]
+agp = "8.5.2"
+android-compileSdk = "34"
+android-minSdk = "24"
+android-targetSdk = "34"
+androidx-activityCompose = "1.9.3"
+androidx-lifecycle = "2.8.3"
+compose-multiplatform = "1.7.0"
+compose-plugin = "1.7.0"
+kotlin = "2.0.21"
+decompose = "3.2.0-alpha02"
+decompose-lifecycle-coroutine = "2.1.0"
+kotlinxSerializationJson = "1.7.3"
+koinVersion = "4.0.0"
+kotlin-datetime = "0.6.0"
+roomVersion = "2.7.0-alpha10"
+sqlliteVersion = "2.5.0-alpha10"
+kspVerison = "2.0.21-1.0.25"
+kotlinx-coroutines = "1.9.0"
+immutableCollections = "0.3.8"
+settingsVersion = "1.2.0"
+buildKonfig = "0.15.2"
+kermit = "2.0.4"
+cupertinoVersion = "0.1.0-alpha04"
+
+[libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+
+decompose-jetbrains = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "decompose-lifecycle-coroutine" }
+decompose-coroutine = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "decompose-lifecycle-coroutine" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+androidx-room-common = { module = "androidx.room:room-common", version.ref = "roomVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
+androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlliteVersion" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlin-datetime" }
+
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
+
+jetbrains-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "immutableCollections" }
+
+settings-core = { group = "com.russhwolf", name = "multiplatform-settings-no-arg", version.ref = "settingsVersion" }
+settings-coroutine = { group = "com.russhwolf", name = "multiplatform-settings-coroutines", version.ref = "settingsVersion" }
+
+cupertino-core = { group = "io.github.alexzhirkevich", name = "cupertino", version.ref = "cupertinoVersion" }
+cupertino-adaptive = { group = "io.github.alexzhirkevich", name = "cupertino-adaptive", version.ref = "cupertinoVersion" }
+
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "kspVerison" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+buildKonfig-plugin = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }

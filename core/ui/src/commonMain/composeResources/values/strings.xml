@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">mates</string>
+    <string name="default_button_text">Готово</string>
+
+    <string name="main_empty_history">Тут будет информация о вашем автомобиле</string>
+</resources>

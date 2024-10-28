@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--LOGIN SCREEN-->
+    <string name="login_login_placeholder">Логин</string>
+    <string name="login_login_error">ц</string>
+
+    <string name="login_password_placeholder">Пароль</string>
+    <string name="login_password_error">ц</string>
+
+    <string name="login_forgot_password">Забыли пароль?</string>
+    <string name="login_sign_in">Зарегистрироваться</string>
+
+    <string name="login_login_button">Войти</string>
+
+    <string name="login_request_success">Авторизация успешна</string>
+    <string name="login_request_failure">Ошибка авторизации</string>
+    <!-- -->
+
+    <!--SIGN UP-->
+    <string name="sign_up_repeat_password_placeholder">Повторите пароль</string>
+    <string name="sign_up_button">Зарегистрироваться</string>
+    <!-- -->
+
+    <!--FORGOT PASSWORD-->
+    <string name="forgot_password_button">Отправить</string>
+    <string name="forgot_password_mail_sent">Письмо отправлено на почту %1$s</string>
+    <!-- -->
+
+    <!--ACQUAINTANCE PASSWORD-->
+    <string name="acquaintance_name_placeholder">Ваше имя</string>
+    <string name="acquaintance_proceed">Готово</string>
+    <!-- -->
+</resources>
