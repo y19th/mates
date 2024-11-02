@@ -6,7 +6,7 @@ import com.sochato.mates.auth.root.ui.AuthComponent
 import com.sochato.mates.core.util.base_components.BaseComponent
 import com.sochato.mates.core.util.extension.getComponent
 import com.sochato.mates.navigator.RootNavigator
-import com.sochato.mates.splash.ui.SplashComponent
+import com.sochato.mates.splash.root.ui.RootSplashComponent
 import kotlinx.serialization.Serializable
 
 class RootComponent(
@@ -38,7 +38,7 @@ class RootComponent(
 
     sealed class Child {
 
-        data class SplashChild(val component: SplashComponent): Child()
+        data class SplashChild(val component: RootSplashComponent): Child()
 
         data class AuthChild(val component: AuthComponent): Child()
     }

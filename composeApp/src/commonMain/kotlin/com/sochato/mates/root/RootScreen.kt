@@ -15,11 +15,11 @@ import com.sochato.mates.core.ui.components.snack.GlobalSnackEffect
 import com.sochato.mates.core.ui.components.snack.WrummySnackbarHost
 import com.sochato.mates.core.ui.theme.WrummyTheme
 import com.sochato.mates.core.util.local.LocalSnackbar
+import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.SnackFlow
-import com.sochato.mates.core.util.local.WrummySettings
 import com.sochato.mates.core.util.models.BuildProperties
 import com.sochato.mates.konfig.BuildKonfig
-import com.sochato.mates.splash.ui.SplashScreen
+import com.sochato.mates.splash.root.ui.RootSplashScreen
 
 @Composable
 fun RootScreen(
@@ -28,7 +28,7 @@ fun RootScreen(
     val stack = component.childStack.subscribeAsState()
     val snackbar = LocalSnackbar.current
 
-    WrummySettings.properties = BuildProperties(
+    MatesSettings.properties = BuildProperties(
         name = BuildKonfig.appVersionName,
         code = BuildKonfig.appVersionCode
     )
@@ -70,7 +70,7 @@ fun RootScreen(
             ) { child ->
                 when (val instance = child.instance) {
                     is RootComponent.Child.SplashChild -> {
-                        SplashScreen(component = instance.component)
+                        RootSplashScreen(component = instance.component)
                     }
 
                     is RootComponent.Child.AuthChild -> {

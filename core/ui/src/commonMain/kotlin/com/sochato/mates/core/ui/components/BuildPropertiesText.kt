@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
-import com.sochato.mates.core.util.local.WrummySettings
+import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.models.versionName
 
 @Composable
@@ -18,7 +18,7 @@ fun BuildPropertiesText(
     style: TextStyle = MaterialTheme.typography.displaySmall
 ) {
     val versionName = rememberSaveable {
-        WrummySettings.properties.versionName()
+        MatesSettings.properties.versionName()
     }
 
     Text(

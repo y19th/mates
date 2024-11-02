@@ -1,3 +1,4 @@
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -5,6 +6,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.jetbrainsCompose)
 }
 
 kotlin {
@@ -31,6 +34,8 @@ kotlin {
             implementation(projects.core.util)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
+
+            implementation(compose.components.resources)
         }
     }
 }

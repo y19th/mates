@@ -11,6 +11,12 @@ fun rememberScreenWidth(): Dp {
 }
 
 @Composable
+fun rememberScreenHeight(): Dp {
+    val height = screenHeight()
+    return remember { height }
+}
+
+@Composable
 expect fun screenWidth(): Dp
 
 @Composable

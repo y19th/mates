@@ -1,4 +1,4 @@
-package com.sochato.mates.splash.domain.events
+package com.sochato.mates.splash.splash.domain.events
 
 import com.sochato.mates.core.util.base_components.BaseEvents
 

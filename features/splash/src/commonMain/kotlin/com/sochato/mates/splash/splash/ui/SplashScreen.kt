@@ -1,4 +1,4 @@
-package com.sochato.mates.splash.ui
+package com.sochato.mates.splash.splash.ui
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -19,7 +19,7 @@ import com.sochato.mates.core.ui.components.AppLogo
 import com.sochato.mates.core.ui.components.BuildPropertiesText
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
 import com.sochato.mates.core.util.models.Transition
-import com.sochato.mates.splash.domain.events.SplashEvents
+import com.sochato.mates.splash.splash.domain.events.SplashEvents
 import kotlinx.coroutines.delay
 
 @Composable
