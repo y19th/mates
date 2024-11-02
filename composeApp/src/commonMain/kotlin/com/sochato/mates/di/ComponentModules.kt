@@ -2,6 +2,8 @@ package com.sochato.mates.di
 
 import com.sochato.mates.auth.di.authModule
 import com.sochato.mates.auth.root.AuthNavigator
+import com.sochato.mates.core.data.di.dataModule
+import com.sochato.mates.core.domain.di.domainModule
 import com.sochato.mates.navigator.AuthNavigatorImpl
 import com.sochato.mates.navigator.RootNavigator
 import com.sochato.mates.navigator.RootNavigatorImpl
@@ -19,5 +21,5 @@ val navigatorModule = module {
 }
 
 val componentModule = module {
-    includes(splashModule, rootModule, authModule)
+    includes(splashModule, rootModule, authModule, dataModule, domainModule)
 }

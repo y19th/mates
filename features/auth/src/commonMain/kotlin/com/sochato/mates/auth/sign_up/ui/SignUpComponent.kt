@@ -4,14 +4,18 @@ import com.arkivanov.decompose.ComponentContext
 import com.sochato.mates.auth.root.AuthNavigator
 import com.sochato.mates.auth.sign_up.domain.events.SignUpEvents
 import com.sochato.mates.auth.sign_up.domain.state.SignUpState
+import com.sochato.mates.core.domain.use_cases.register.RequestRegisterUseCase
 import com.sochato.mates.core.domain.use_cases.transition.UpdateTransitionUseCase
 import com.sochato.mates.core.util.base_components.ScreenComponent
 import com.sochato.mates.core.util.extension.isNotMatchEmailPattern
+import com.sochato.mates.core.util.local.findWrummyException
+import com.sochato.mates.core.util.models.SnackState
 
 internal class SignUpComponent(
     componentContext: ComponentContext,
     private val navigator: AuthNavigator,
-    private val updateTransition: UpdateTransitionUseCase
+    private val updateTransition: UpdateTransitionUseCase,
+    private val requestRegister: RequestRegisterUseCase
 ) : ScreenComponent<SignUpState, SignUpEvents>(
     initialState = SignUpState(),
     componentContext = componentContext
@@ -51,6 +55,19 @@ internal class SignUpComponent(
 
             SignUpEvents.OnSignUp -> {
                 if (isValid()) {
+                    launchIO {
+                        with(state.value) {
+                            requestRegister(
+                                email = email,
+                                password = password,
+                                nickname = "dima_lox"
+                            ).onSuccess {
+                                snackEffect(SnackState.success(it))
+                            }.onFailure {
+                                snackEffect(SnackState.failure(it.findWrummyException().message))
+                            }
+                        }
+                    }
                 }
             }
         }

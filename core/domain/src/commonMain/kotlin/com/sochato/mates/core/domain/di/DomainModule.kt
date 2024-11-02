@@ -1,6 +1,7 @@
 package com.sochato.mates.core.domain.di
 
 import com.sochato.mates.core.domain.models.WrummyDispatchers
+import com.sochato.mates.core.domain.use_cases.register.RequestRegisterUseCase
 import com.sochato.mates.core.domain.use_cases.transition.ReceiveTransitionUseCase
 import com.sochato.mates.core.domain.use_cases.transition.UpdateTransitionUseCase
 import org.koin.core.module.dsl.factoryOf
@@ -10,4 +11,5 @@ val domainModule = module {
     single { WrummyDispatchers() }
     factoryOf(::UpdateTransitionUseCase)
     factoryOf(::ReceiveTransitionUseCase)
+    factoryOf(::RequestRegisterUseCase)
 }

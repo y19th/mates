@@ -8,14 +8,15 @@ androidx-lifecycle = "2.8.3"
 compose-multiplatform = "1.7.0"
 compose-plugin = "1.7.0"
 kotlin = "2.0.21"
-decompose = "3.2.0-alpha02"
-decompose-lifecycle-coroutine = "2.1.0"
+decompose = "3.2.1"
+ktor-version = "3.0.1"
+decompose-lifecycle-coroutine = "2.2.1"
 kotlinxSerializationJson = "1.7.3"
 koinVersion = "4.0.0"
 kotlin-datetime = "0.6.0"
-roomVersion = "2.7.0-alpha10"
-sqlliteVersion = "2.5.0-alpha10"
-kspVerison = "2.0.21-1.0.25"
+roomVersion = "2.7.0-alpha11"
+sqlliteVersion = "2.5.0-alpha11"
+kspVerison = "2.0.21-1.0.26"
 kotlinx-coroutines = "1.9.0"
 immutableCollections = "0.3.8"
 settingsVersion = "1.2.0"
@@ -57,6 +58,14 @@ cupertino-adaptive = { group = "io.github.alexzhirkevich", name = "cupertino-ada
 
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 
+ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor-version"}
+ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor-version"}
+ktor-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor-version"}
+ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor-version"}
+ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor-version"}
+ktor-content-serializator = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor-version"}
+ktor-content-logger = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor-version"}
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -66,3 +75,6 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "kspVerison" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildKonfig-plugin = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
+
+[bundles]
+ktor-core = ["ktor-cio", "ktor-content-negotiation", "ktor-content-serializator", "ktor-content-logger", "ktor-core"]
