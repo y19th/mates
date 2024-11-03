@@ -5,8 +5,6 @@ import com.sochato.mates.core.domain.use_cases.profile.RequestProfileUseCase
 import com.sochato.mates.core.util.base_components.ScreenComponent
 import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.debugMessage
-import com.sochato.mates.core.util.local.findWrummyException
-import com.sochato.mates.core.util.models.SnackState
 import com.sochato.mates.home.main.domain.events.MainEvents
 import com.sochato.mates.home.main.domain.state.MainState
 import com.sochato.mates.home.root.HomeNavigator

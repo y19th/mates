@@ -1,7 +1,5 @@
 package com.sochato.mates.auth.login.ui
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,17 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sochato.mates.auth.login.domain.events.LoginEvents
 import com.sochato.mates.auth.login.ui.components.LoginExpandedContent
 import com.sochato.mates.core.ui.components.AppLogo
-import com.sochato.mates.core.ui.components.BuildPropertiesText
 import com.sochato.mates.core.ui.components.WrummyColumn
 import com.sochato.mates.core.ui.components.buttons.RoundedButton
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
