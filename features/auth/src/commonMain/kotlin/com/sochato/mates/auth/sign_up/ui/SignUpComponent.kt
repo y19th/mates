@@ -53,6 +53,15 @@ internal class SignUpComponent(
                 }
             }
 
+            is SignUpEvents.OnNicknameChange -> {
+                update {
+                    it.copy(
+                        nickname = event.newValue,
+                        isNicknameError = false
+                    )
+                }
+            }
+
             SignUpEvents.OnSignUp -> {
                 if (isValid()) {
                     launchIO {
@@ -60,7 +69,7 @@ internal class SignUpComponent(
                             requestRegister(
                                 email = email,
                                 password = password,
-                                nickname = "dima_lox"
+                                nickname = nickname
                             ).onSuccess {
                                 snackEffect(SnackState.success(it))
                             }.onFailure {
@@ -87,6 +96,10 @@ internal class SignUpComponent(
             }
             if (repeatPassword != password || isPasswordRepeatError) {
                 update { it.copy(isPasswordRepeatError = true) }
+                valid = false
+            }
+            if (nickname.isEmpty() || isNicknameError) {
+                update { it.copy(isNicknameError = true) }
                 valid = false
             }
         }

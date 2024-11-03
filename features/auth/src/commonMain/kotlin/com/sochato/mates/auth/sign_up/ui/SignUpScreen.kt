@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,6 +30,7 @@ import mates.features.auth.generated.resources.Res
 import mates.features.auth.generated.resources.login_login_placeholder
 import mates.features.auth.generated.resources.login_password_placeholder
 import mates.features.auth.generated.resources.sign_up_button
+import mates.features.auth.generated.resources.sign_up_nickname_placeholder
 import mates.features.auth.generated.resources.sign_up_repeat_password_placeholder
 import org.jetbrains.compose.resources.stringResource
 
@@ -42,6 +45,7 @@ internal fun SignUpScreen(
     WrummyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .windowInsetsPadding(WindowInsets.systemBars)
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -51,7 +55,6 @@ internal fun SignUpScreen(
                     BackNavigationIcon { handleEvents(SignUpEvents.OnNavigateBack) }
                 }
             )
-
         }
     ) {
         AppLogo()
@@ -90,6 +93,18 @@ internal fun SignUpScreen(
             error = state.value.isPasswordRepeatError,
             onValueChange = {
                 handleEvents(SignUpEvents.OnRepeatPasswordChange(it))
+            }
+        )
+
+        VerticalSpacer(height = 24.dp)
+
+        WrummyTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = state.value.nickname,
+            placeholder = stringResource(Res.string.sign_up_nickname_placeholder),
+            error = state.value.isNicknameError,
+            onValueChange = {
+                handleEvents(SignUpEvents.OnNicknameChange(it))
             }
         )
 

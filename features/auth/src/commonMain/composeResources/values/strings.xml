@@ -20,6 +20,9 @@
     <!--SIGN UP-->
     <string name="sign_up_repeat_password_placeholder">Повторите пароль</string>
     <string name="sign_up_button">Зарегистрироваться</string>
+
+    <string name="sign_up_nickname_placeholder">Никнейм</string>
+    <string name="sign_up_nickname_placeholder_error">Необходимо ввести свой никнейм</string>
     <!-- -->
 
     <!--FORGOT PASSWORD-->

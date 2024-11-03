@@ -10,6 +10,8 @@ internal sealed interface SignUpEvents : BaseEvents {
 
     data class OnRepeatPasswordChange(val newValue: String) : SignUpEvents
 
+    data class OnNicknameChange(val newValue: String) : SignUpEvents
+
     data object OnNavigateBack : SignUpEvents
 
     data object OnSignUp : SignUpEvents

@@ -15,6 +15,8 @@ sealed class WrummyException(override val message: String) : Throwable() {
     data object InvalidCredentialsError: WrummyException("invalid credentials")
 
     data object UnknownError : WrummyException("unknown error")
+
+    class CustomError(message: String): WrummyException(message)
 }
 
 fun Throwable.toWrummyException(): WrummyException {
@@ -26,6 +28,7 @@ fun Throwable.toWrummyException(): WrummyException {
 
 fun Throwable.findWrummyException(): WrummyException {
     if(message == null) return WrummyException.UnknownError
+    if(this is WrummyException.CustomError) return this
 
     return if (requireNotNull(message).contains("network"))
         WrummyException.NetworkError

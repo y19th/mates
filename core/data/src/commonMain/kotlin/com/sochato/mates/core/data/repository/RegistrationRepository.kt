@@ -1,9 +1,9 @@
 package com.sochato.mates.core.data.repository
 
 import com.sochato.mates.core.data.api.MatesApi
+import com.sochato.mates.core.data.extension.fetchResponse
 import com.sochato.mates.core.data.model.request.RegisterRequest
 import com.sochato.mates.core.data.model.response.RegisterResponse
-import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 
@@ -19,9 +19,6 @@ internal class RegistrationRepositoryImpl : BaseRepository(), RegistrationReposi
     ): Result<RegisterResponse> = runCatching {
         client.post(urlString = MatesApi.Register) {
             setBody(request)
-            /*parameter("email", request.email)
-            parameter("password", request.password)
-            parameter("nickname", request.nickname)*/
-        }.body()
+        }.fetchResponse()
     }
 }

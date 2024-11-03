@@ -64,6 +64,7 @@ ktor-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor-ve
 ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor-version"}
 ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor-version"}
 ktor-content-serializator = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor-version"}
+ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor-version"}
 ktor-content-logger = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor-version"}
 
 [plugins]
@@ -77,4 +78,4 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 buildKonfig-plugin = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 
 [bundles]
-ktor-core = ["ktor-cio", "ktor-content-negotiation", "ktor-content-serializator", "ktor-content-logger", "ktor-core"]
+ktor-core = ["ktor-cio", "ktor-content-negotiation", "ktor-content-serializator", "ktor-content-logger", "ktor-core", "ktor-auth"]
