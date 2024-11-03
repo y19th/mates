@@ -35,13 +35,6 @@ internal fun LoginScreen(
 ) {
     val state = component.state.collectAsState()
     val handleEvents = component.rememberHandleEvents()
-    val isInputsVisible = rememberSaveable {
-        mutableStateOf(false)
-    }
-
-    LaunchedEffect(Unit) {
-        isInputsVisible.value = true
-    }
 
     WrummyColumn(
         modifier = Modifier
@@ -55,30 +48,18 @@ internal fun LoginScreen(
 
         AppLogo()
 
-        AnimatedVisibility(
-            visible = isInputsVisible.value
-        ) {
-            LoginExpandedContent(
-                uncollectedState = state,
-                handleEvents = handleEvents
-            )
-        }
-
+        LoginExpandedContent(
+            uncollectedState = state,
+            handleEvents = handleEvents
+        )
 
         Spacer(modifier = Modifier.weight(1f))
 
-        AnimatedContent(
-            targetState = isInputsVisible.value
-        ) { target ->
-            if (target)
-                RoundedButton(
-                    title = stringResource(Res.string.login_login_button),
-                    isLoading = state.value.isLoading,
-                    onClick = { handleEvents(LoginEvents.OnLogin) }
-                )
-            else
-                BuildPropertiesText()
-        }
+        RoundedButton(
+            title = stringResource(Res.string.login_login_button),
+            isLoading = state.value.isLoading,
+            onClick = { handleEvents(LoginEvents.OnLogin) }
+        )
 
         Spacer(modifier = Modifier.weight(0.1f))
     }

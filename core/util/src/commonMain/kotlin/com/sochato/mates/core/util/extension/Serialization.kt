@@ -7,6 +7,7 @@ inline fun <reified T: Any> T.encode(): String {
     return Json.encodeToString(value = this)
 }
 
+
 inline fun <reified T: Any> String.decode(): T {
     return Json.decodeFromString(this)
 }

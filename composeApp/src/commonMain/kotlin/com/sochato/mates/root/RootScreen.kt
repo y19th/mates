@@ -38,7 +38,7 @@ fun RootScreen(
 
     val animator = when (stack.value.active.instance) {
         is RootComponent.Child.AuthChild -> {
-            fade(tween(0))
+            fade(tween(400))
         }
 
         is RootComponent.Child.SplashChild -> {

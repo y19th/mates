@@ -4,6 +4,7 @@ import com.sochato.mates.core.data.api.MatesApi
 import com.sochato.mates.core.data.extension.fetchResponse
 import com.sochato.mates.core.data.model.request.LoginRequest
 import com.sochato.mates.core.data.model.response.LoginResponse
+import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 
@@ -14,7 +15,9 @@ interface LoginRepository {
     ): Result<LoginResponse>
 }
 
-internal class LoginRepositoryImpl : BaseRepository(), LoginRepository {
+internal class LoginRepositoryImpl(
+    private val client: HttpClient
+) : LoginRepository {
 
     override suspend fun requestLogin(
         request: LoginRequest

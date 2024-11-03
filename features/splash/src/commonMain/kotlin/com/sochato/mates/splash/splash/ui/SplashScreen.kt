@@ -2,6 +2,7 @@ package com.sochato.mates.splash.splash.ui
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.graphicsLayer
 import com.sochato.mates.core.ui.components.AppLogo
 import com.sochato.mates.core.ui.components.BuildPropertiesText
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
@@ -28,21 +31,10 @@ fun SplashScreen(
 ) {
     val state = component.state.collectAsState()
     val handleEvents = component.rememberHandleEvents()
-    val spacerWeight = remember { Animatable(0.7f) }
 
     state.value.transition.let { transition ->
         LaunchedEffect(transition) {
             if (transition != null) {
-                if (transition == Transition.None) {
-                    delay(800)
-                    spacerWeight.animateTo(
-                        targetValue = 0.3f,
-                        animationSpec = tween(
-                            durationMillis = 800,
-                            easing = LinearOutSlowInEasing
-                        )
-                    )
-                }
                 handleEvents(SplashEvents.OnNavigate)
             }
         }
@@ -53,7 +45,7 @@ fun SplashScreen(
             .windowInsetsPadding(WindowInsets.systemBars),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.weight(spacerWeight.value))
+        Spacer(modifier = Modifier.weight(0.7f))
 
         AppLogo()
 

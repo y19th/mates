@@ -7,7 +7,9 @@ import com.sochato.mates.core.domain.BaseUseCase
 import com.sochato.mates.core.domain.mapper.toTokenEntity
 import com.sochato.mates.core.domain.models.WrummyDispatchers
 import com.sochato.mates.core.local.repository.TokenRepository
+import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.debugMessage
+import com.sochato.mates.core.util.models.Token
 import kotlinx.coroutines.withContext
 
 class RequestLoginUseCase(
@@ -24,6 +26,7 @@ class RequestLoginUseCase(
             request = LoginRequest(email, password)
         ).onSuccess {
             tokenRepository.insert(it.toTokenEntity())
+            MatesSettings.token = Token(it.access, it.refresh)
         }.onFailure {
             debugMessage(it.stackTraceToString())
         }
