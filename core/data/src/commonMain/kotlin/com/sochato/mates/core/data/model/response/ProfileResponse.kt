@@ -10,7 +10,7 @@ data class ProfileResponse(
     val nickname: String,
     @SerialName("mates_points") val matesPoints: Int,
     @SerialName("registration_date") val registrationDate: String,
-    @SerialName("profile_description") val profileDescription: String,
+    @SerialName("profile_description") val profileDescription: String?,
     @SerialName("status") val status: String,
-    @SerialName("profile_picture") val pictureUrl: String
+    @SerialName("profile_picture") val pictureUrl: String?
 )

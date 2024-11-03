@@ -1,21 +1,27 @@
 package com.sochato.mates.home.main.ui
 
 import com.arkivanov.decompose.ComponentContext
+import com.sochato.mates.core.domain.use_cases.profile.RequestProfileUseCase
 import com.sochato.mates.core.util.base_components.ScreenComponent
 import com.sochato.mates.core.util.local.MatesSettings
+import com.sochato.mates.core.util.local.findWrummyException
+import com.sochato.mates.core.util.models.SnackState
 import com.sochato.mates.home.main.domain.events.MainEvents
 import com.sochato.mates.home.main.domain.state.MainState
 import com.sochato.mates.home.root.HomeNavigator
+import kotlinx.coroutines.withTimeout
+import kotlin.time.Duration.Companion.seconds
 
 internal class MainComponent(
     componentContext: ComponentContext,
-    private val navigator: HomeNavigator
+    private val navigator: HomeNavigator,
+    private val requestProfile: RequestProfileUseCase
 ) : ScreenComponent<MainState, MainEvents>(
     initialState = MainState.Loading,
     componentContext = componentContext
 ) {
     init {
-        update { MainState.Data() }
+        refresh()
     }
 
     override fun handleEvent(event: MainEvents) {
@@ -25,6 +31,7 @@ internal class MainComponent(
             }
 
             MainEvents.OnRefresh -> {
+                refresh()
             }
 
             is MainEvents.OnSearchChange -> {
@@ -36,6 +43,20 @@ internal class MainComponent(
                 navigate {
 
                 }
+            }
+        }
+    }
+
+    private fun refresh() {
+        update { MainState.Loading }
+        launchIO {
+            withTimeout(6.seconds) {
+                requestProfile()
+                    .onSuccess { model ->
+                        update { MainState.Data(model = model) }
+                    }.onFailure {
+                        update { MainState.Error }
+                    }
             }
         }
     }

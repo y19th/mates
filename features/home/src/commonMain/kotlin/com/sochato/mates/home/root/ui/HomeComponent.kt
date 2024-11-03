@@ -2,6 +2,7 @@ package com.sochato.mates.home.root.ui
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.childStack
+import com.sochato.mates.core.domain.use_cases.profile.RequestProfileUseCase
 import com.sochato.mates.core.util.base_components.BaseComponent
 import com.sochato.mates.core.util.extension.getComponent
 import com.sochato.mates.home.main.ui.MainComponent
@@ -12,6 +13,7 @@ class HomeComponent(
     componentContext: ComponentContext,
     navigator: HomeNavigator
 ) : BaseComponent(componentContext) {
+
 
     val childStack = childStack(
         source = navigator.navigation,

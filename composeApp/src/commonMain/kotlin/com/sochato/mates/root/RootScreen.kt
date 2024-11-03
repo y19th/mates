@@ -20,6 +20,7 @@ import com.sochato.mates.core.util.local.SnackFlow
 import com.sochato.mates.core.util.models.BuildProperties
 import com.sochato.mates.home.root.ui.HomeScreen
 import com.sochato.mates.konfig.BuildKonfig
+import com.sochato.mates.shared.isDebug
 import com.sochato.mates.splash.root.ui.RootSplashScreen
 
 @Composable
@@ -31,7 +32,8 @@ fun RootScreen(
 
     MatesSettings.properties = BuildProperties(
         name = BuildKonfig.appVersionName,
-        code = BuildKonfig.appVersionCode
+        code = BuildKonfig.appVersionCode,
+        debug = isDebug
     )
 
     val animator = when (stack.value.active.instance) {

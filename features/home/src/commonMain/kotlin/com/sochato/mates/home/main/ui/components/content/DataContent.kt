@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.sochato.mates.core.domain.models.ProfileModel
 import com.sochato.mates.core.ui.components.WrummyColumn
 import com.sochato.mates.core.ui.components.bars.WrummyTopBar
 import com.sochato.mates.core.ui.components.inputs.SearchTextField
@@ -26,8 +28,10 @@ import org.jetbrains.compose.resources.vectorResource
 @Composable
 internal fun DataContent(
     isFirstLaunch: Boolean,
+    model: ProfileModel,
     handleEvents: (MainEvents) -> Unit
 ) {
+    val state = rememberUpdatedState(model)
 
     WrummyColumn(
         modifier = Modifier
@@ -39,7 +43,7 @@ internal fun DataContent(
                     resource = if (isFirstLaunch)
                         Res.string.main_top_bar_title else Res.string.main_top_bar_title_again
                 ),
-                contentText = "asd",
+                contentText = model.nickname,
                 trailingIcon = {
                     Icon(
                         modifier = Modifier

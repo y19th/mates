@@ -39,6 +39,7 @@ kotlin {
             api(compose.components.resources)
             api(libs.cupertino.core)
             api(libs.cupertino.adaptive)
+            api(libs.shimmer.core)
         }
     }
 }

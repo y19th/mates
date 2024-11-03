@@ -1,12 +1,16 @@
 package com.sochato.mates.core.ui.components.bars
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
@@ -25,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
+import com.sochato.mates.core.ui.extension.shim
 import com.sochato.mates.core.ui.theme.TopBarColor
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 
@@ -87,6 +92,33 @@ fun WrummyTopBar(
         trailingIcon()
     }
 }
+
+@Composable
+fun ShimmedWrummyTopBar(
+    modifier: Modifier = Modifier,
+    trailingIcon: @Composable () -> Unit = {}
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
+            .padding(horizontal = 24.dp, vertical = 16.dp)
+            .height(IntrinsicSize.Max)
+            .then(modifier),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(0.65f)
+                .shim()
+        )
+
+        trailingIcon()
+    }
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -29,6 +29,7 @@ internal fun MainScreen(
         is MainState.Data -> {
             DataContent(
                 isFirstLaunch = isFirst,
+                model = instance.model,
                 handleEvents = handleEvents
             )
         }
