@@ -7,7 +7,7 @@ interface TokenRepository {
 
     suspend fun insert(entity: TokenEntity)
 
-    suspend fun get(): TokenEntity
+    suspend fun get(): TokenEntity?
 }
 
 internal class TokenRepositoryImpl(
@@ -17,7 +17,7 @@ internal class TokenRepositoryImpl(
         dao.update(entity)
     }
 
-    override suspend fun get(): TokenEntity {
+    override suspend fun get(): TokenEntity? {
         return dao.get()
     }
 }

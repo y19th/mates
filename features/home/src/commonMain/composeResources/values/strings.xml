@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--MAIN SCREEN-->
+    <string name="main_top_bar_title">Приветствуем!</string>
+    <string name="main_top_bar_title_again">С возвращением!</string>
+
+    <string name="main_search_placeholder">Поиск</string>
+
+    <string name="main_empty_history">Тут будет информация о вашем автомобиле</string>
+    <string name="main_history_header">История</string>
+    <!-- -->
+
+    <!--ADD CAR SCREEN-->
+    <string name="add_car_header">Давайте добавим вашу машину</string>
+    <string name="add_car_mark_placeholder">Марка машины</string>
+    <string name="add_car_model_placeholder">Модель автомобиля</string>
+    <string name="add_car_number_hint">Например A666BC | 34</string>
+    <string name="add_car_number_error">Номер должен соответствовать виду "A666BC | 34"</string>
+    <string name="add_car_button_add">Добавить</string>
+    <!-- -->
+</resources>

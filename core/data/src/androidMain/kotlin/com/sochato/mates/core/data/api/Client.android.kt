@@ -24,7 +24,7 @@ private class TokenProvider(
     private val repository: TokenRepository = getKoin().get()
 ) : KoinComponent {
 
-    suspend fun get(): TokenEntity = repository.get()
+    suspend fun get(): TokenEntity? = repository.get()
 }
 
 internal actual val client: HttpClient = HttpClient(OkHttp) {
@@ -57,7 +57,6 @@ internal actual val client: HttpClient = HttpClient(OkHttp) {
     install(Logging) {
         logger = object : Logger {
             override fun log(message: String) {
-
                 message(
                     tag = "HttpClient(OkHttp)",
                     message = message,
@@ -65,7 +64,7 @@ internal actual val client: HttpClient = HttpClient(OkHttp) {
                 )
             }
         }
-        //level = if(Settings.properties.debug) LogLevel.INFO else LogLevel.NONE
+        //level = if(MatesSettings.properties.debug) LogLevel.INFO else LogLevel.NONE
     }
     //install(PlutoKtorInterceptor)
 }

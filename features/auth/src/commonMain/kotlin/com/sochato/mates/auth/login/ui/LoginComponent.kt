@@ -11,6 +11,7 @@ import com.sochato.mates.core.util.base_components.ScreenComponent
 import com.sochato.mates.core.util.extension.isNotMatchEmailPattern
 import com.sochato.mates.core.util.local.findWrummyException
 import com.sochato.mates.core.util.models.SnackState
+import com.sochato.mates.core.util.models.Transition.Authorized
 
 internal class LoginComponent(
     componentContext: ComponentContext,
@@ -49,6 +50,13 @@ internal class LoginComponent(
                             password = state.value.password
                         ).onSuccess {
                             snackEffect(SnackState.success("success"))
+                            launchIO {
+                                updateTransition(Authorized)
+                            }.invokeOnCompletion {
+                                navigate {
+                                    navigator.navigateHome()
+                                }
+                            }
                         }.onFailure {
                             snackEffect(SnackState.failure(it.findWrummyException().message))
                         }

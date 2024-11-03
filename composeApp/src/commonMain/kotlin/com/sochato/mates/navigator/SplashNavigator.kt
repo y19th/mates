@@ -21,7 +21,9 @@ internal class SplashNavigatorImpl(
     override fun navigate(transition: Transition) {
         when(transition) {
             Transition.Authorized -> {
-                //TODO
+                rootNavigator.handleConfiguration(
+                    RootComponent.Configuration.HomeConfiguration
+                )
             }
             Transition.None -> {
                 rootNavigator.handleConfiguration(

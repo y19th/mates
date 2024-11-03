@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b5d80d41ac2e71539d5699f49b20f4c2",
+    "identityHash": "c810be89bd827d95dd988b8d250e4035",
     "entities": [
       {
         "tableName": "transition",
@@ -53,103 +53,24 @@
         }
       },
       {
-        "tableName": "details",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `carId` TEXT NOT NULL, `name` TEXT NOT NULL, `icon` TEXT NOT NULL, `color` TEXT NOT NULL, `mileage` INTEGER NOT NULL, `millis` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`carId`) REFERENCES `cars`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "tableName": "token",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `access` TEXT NOT NULL, `refresh` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "carId",
-            "columnName": "carId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "icon",
-            "columnName": "icon",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "color",
-            "columnName": "color",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mileage",
-            "columnName": "mileage",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "millis",
-            "columnName": "millis",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": false,
-          "columnNames": [
-            "id"
-          ]
-        },
-        "foreignKeys": [
-          {
-            "table": "cars",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "carId"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
-      },
-      {
-        "tableName": "cars",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `userId` TEXT NOT NULL, `number` TEXT NOT NULL, `mark` TEXT NOT NULL, `model` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`userId`) REFERENCES `user`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "access",
+            "columnName": "access",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "userId",
-            "columnName": "userId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "number",
-            "columnName": "number",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mark",
-            "columnName": "mark",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "model",
-            "columnName": "model",
+            "fieldPath": "refresh",
+            "columnName": "refresh",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -159,25 +80,12 @@
           "columnNames": [
             "id"
           ]
-        },
-        "foreignKeys": [
-          {
-            "table": "user",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "userId"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
+        }
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b5d80d41ac2e71539d5699f49b20f4c2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c810be89bd827d95dd988b8d250e4035')"
     ]
   }
 }

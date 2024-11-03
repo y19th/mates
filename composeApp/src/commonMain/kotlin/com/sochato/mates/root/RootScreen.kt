@@ -18,6 +18,7 @@ import com.sochato.mates.core.util.local.LocalSnackbar
 import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.SnackFlow
 import com.sochato.mates.core.util.models.BuildProperties
+import com.sochato.mates.home.root.ui.HomeScreen
 import com.sochato.mates.konfig.BuildKonfig
 import com.sochato.mates.splash.root.ui.RootSplashScreen
 
@@ -75,6 +76,10 @@ fun RootScreen(
 
                     is RootComponent.Child.AuthChild -> {
                         AuthScreen(component = instance.component)
+                    }
+
+                    is RootComponent.Child.HomeChild -> {
+                        HomeScreen(component = instance.component)
                     }
                 }
             }

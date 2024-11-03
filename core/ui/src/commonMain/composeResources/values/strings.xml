@@ -4,4 +4,7 @@
     <string name="default_button_text">Готово</string>
 
     <string name="main_empty_history">Тут будет информация о вашем автомобиле</string>
+
+    <string name="error_header">Что-то пошло не так</string>
+    <string name="error_button">Попробовать снова</string>
 </resources>

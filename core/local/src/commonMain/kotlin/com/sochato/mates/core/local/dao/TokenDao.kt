@@ -13,5 +13,5 @@ interface TokenDao {
     suspend fun update(entity: TokenEntity)
 
     @Query("select * from token")
-    suspend fun get(): TokenEntity
+    suspend fun get(): TokenEntity?
 }

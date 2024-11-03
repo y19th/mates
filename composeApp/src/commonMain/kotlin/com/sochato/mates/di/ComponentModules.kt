@@ -4,7 +4,10 @@ import com.sochato.mates.auth.di.authModule
 import com.sochato.mates.auth.root.AuthNavigator
 import com.sochato.mates.core.data.di.dataModule
 import com.sochato.mates.core.domain.di.domainModule
+import com.sochato.mates.home.di.homeModule
+import com.sochato.mates.home.root.HomeNavigator
 import com.sochato.mates.navigator.AuthNavigatorImpl
+import com.sochato.mates.navigator.HomeNavigatorImpl
 import com.sochato.mates.navigator.RootNavigator
 import com.sochato.mates.navigator.RootNavigatorImpl
 import com.sochato.mates.navigator.SplashNavigatorImpl
@@ -18,8 +21,9 @@ val navigatorModule = module {
     singleOf(::RootNavigatorImpl).bind<RootNavigator>()
     singleOf(::SplashNavigatorImpl).bind<RootSplashNavigator>()
     singleOf(::AuthNavigatorImpl).bind<AuthNavigator>()
+    singleOf(::HomeNavigatorImpl).bind<HomeNavigator>()
 }
 
 val componentModule = module {
-    includes(splashModule, rootModule, authModule, dataModule, domainModule)
+    includes(splashModule, rootModule, homeModule, authModule, dataModule, domainModule)
 }

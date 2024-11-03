@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.sochato.mates.auth.root.ui.AuthComponent
 import com.sochato.mates.core.util.base_components.BaseComponent
 import com.sochato.mates.core.util.extension.getComponent
+import com.sochato.mates.home.root.ui.HomeComponent
 import com.sochato.mates.navigator.RootNavigator
 import com.sochato.mates.splash.root.ui.RootSplashComponent
 import kotlinx.serialization.Serializable
@@ -33,6 +34,10 @@ class RootComponent(
         Configuration.AuthConfiguration -> {
             Child.AuthChild(getComponent(context))
         }
+
+        Configuration.HomeConfiguration -> {
+            Child.HomeChild(getComponent(context))
+        }
     }
 
 
@@ -41,6 +46,8 @@ class RootComponent(
         data class SplashChild(val component: RootSplashComponent): Child()
 
         data class AuthChild(val component: AuthComponent): Child()
+
+        data class HomeChild(val component: HomeComponent): Child()
     }
 
     @Serializable
@@ -51,5 +58,8 @@ class RootComponent(
 
         @Serializable
         data object AuthConfiguration: Configuration()
+
+        @Serializable
+        data object HomeConfiguration: Configuration()
     }
 }

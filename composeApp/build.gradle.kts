@@ -40,6 +40,7 @@ kotlin {
 
             export(projects.features.splash)
             export(projects.features.auth)
+            export(projects.features.home)
         }
     }
 
@@ -60,6 +61,7 @@ kotlin {
 
             api(projects.features.splash)
             api(projects.features.auth)
+            api(projects.features.home)
         }
     }
 }
