@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--PROFILE SCREEN-->
+    <string name="profile_title">Профиль</string>
+    <string name="profile_mates_header">Mates</string>
+    <string name="profile_library">Библиотека</string>
+    <string name="profile_mates_points">Mates points</string>
+    <!-- -->
+</resources>
