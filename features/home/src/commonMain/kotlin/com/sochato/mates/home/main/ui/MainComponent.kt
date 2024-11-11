@@ -8,6 +8,8 @@ import com.sochato.mates.core.util.local.debugMessage
 import com.sochato.mates.home.main.domain.events.MainEvents
 import com.sochato.mates.home.main.domain.state.MainState
 import com.sochato.mates.home.root.HomeNavigator
+import com.sochato.mates.home.root.ui.HomeComponent
+import com.sochato.mates.profile.profile.domain.model.ProfileConfig
 import kotlinx.coroutines.withTimeout
 import kotlin.time.Duration.Companion.seconds
 
@@ -39,9 +41,15 @@ internal class MainComponent(
             }
 
             MainEvents.OnNavigateToProfile -> {
-                navigate {
-
-                }
+                val instance = state.value
+                if (instance is MainState.Data)
+                    navigate {
+                        navigator.handleConfiguration(
+                            HomeComponent.Configuration.ProfileConfiguration(
+                                config = ProfileConfig(instance.model)
+                            )
+                        )
+                    }
             }
         }
     }

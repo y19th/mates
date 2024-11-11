@@ -29,6 +29,8 @@ internal suspend inline fun <reified Result> HttpResponse.fetchResponse(): Resul
         body()
     else if (status.value == 401)
         throw WrummyException.CustomError(unauthorizedBody())
+    else if (status.value == 500)
+        throw WrummyException.InternalServerError
     else
         throw WrummyException.CustomError(parsedBodyText())
 }

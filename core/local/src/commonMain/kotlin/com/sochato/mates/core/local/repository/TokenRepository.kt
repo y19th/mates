@@ -8,6 +8,8 @@ interface TokenRepository {
     suspend fun insert(entity: TokenEntity)
 
     suspend fun get(): TokenEntity?
+
+    suspend fun delete()
 }
 
 internal class TokenRepositoryImpl(
@@ -19,5 +21,9 @@ internal class TokenRepositoryImpl(
 
     override suspend fun get(): TokenEntity? {
         return dao.get()
+    }
+
+    override suspend fun delete() {
+        dao.delete()
     }
 }

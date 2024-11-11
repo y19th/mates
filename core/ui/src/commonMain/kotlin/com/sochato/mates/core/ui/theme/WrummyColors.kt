@@ -22,7 +22,8 @@ data class WrummyColors(
     val outlineColor: Color,
     val onOutlineColor: Color,
     val hintColor: Color,
-    val shimColor: Color
+    val shimColor: Color,
+    val profileSecondaryColor: Color
 )
 
 private fun wrummyColorPalette(): WrummyColors = WrummyColors(
@@ -37,5 +38,6 @@ private fun wrummyColorPalette(): WrummyColors = WrummyColors(
     outlineColor = OutlineColor,
     onOutlineColor = OnOutlineColor,
     hintColor = HintColor,
-    shimColor = ShimColor
+    shimColor = ShimColor,
+    profileSecondaryColor = ProfileSecondaryTextColor
 )

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProfileResponse(
-    @SerialName("ui") val uid: String,
+    @SerialName("uid") val uid: String,
     val email: String,
     val nickname: String,
     @SerialName("mates_points") val matesPoints: Int,

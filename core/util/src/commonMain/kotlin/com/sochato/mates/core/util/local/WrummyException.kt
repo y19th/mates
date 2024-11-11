@@ -14,6 +14,8 @@ sealed class WrummyException(override val message: String) : Throwable() {
 
     data object InvalidCredentialsError: WrummyException("invalid credentials")
 
+    data object InternalServerError: WrummyException("something went wrong")
+
     data object UnknownError : WrummyException("unknown error")
 
     class CustomError(message: String): WrummyException(message)

@@ -35,6 +35,8 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.local)
 
+            implementation(projects.features.profile)
+
             implementation(compose.components.resources)
         }
     }

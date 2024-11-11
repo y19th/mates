@@ -72,6 +72,7 @@ internal class SignUpComponent(
                                 nickname = nickname
                             ).onSuccess {
                                 snackEffect(SnackState.success(it))
+                                navigate { navigator.pop() }
                             }.onFailure {
                                 snackEffect(SnackState.failure(it.findWrummyException().message))
                             }

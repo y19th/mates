@@ -10,7 +10,10 @@ import com.sochato.mates.navigator.AuthNavigatorImpl
 import com.sochato.mates.navigator.HomeNavigatorImpl
 import com.sochato.mates.navigator.RootNavigator
 import com.sochato.mates.navigator.RootNavigatorImpl
+import com.sochato.mates.navigator.RootProfileNavigatorImpl
 import com.sochato.mates.navigator.SplashNavigatorImpl
+import com.sochato.mates.profile.di.profileModule
+import com.sochato.mates.profile.root.RootProfileNavigator
 import com.sochato.mates.splash.di.splashModule
 import com.sochato.mates.splash.root.RootSplashNavigator
 import org.koin.core.module.dsl.singleOf
@@ -22,8 +25,12 @@ val navigatorModule = module {
     singleOf(::SplashNavigatorImpl).bind<RootSplashNavigator>()
     singleOf(::AuthNavigatorImpl).bind<AuthNavigator>()
     singleOf(::HomeNavigatorImpl).bind<HomeNavigator>()
+    singleOf(::RootProfileNavigatorImpl).bind<RootProfileNavigator>()
 }
 
 val componentModule = module {
-    includes(splashModule, rootModule, homeModule, authModule, dataModule, domainModule)
+    includes(
+        splashModule, rootModule, homeModule,
+        profileModule, authModule, dataModule, domainModule
+    )
 }

@@ -96,7 +96,7 @@ internal fun SignUpScreen(
             }
         )
 
-        VerticalSpacer(height = 24.dp)
+        VerticalSpacer(height = 16.dp)
 
         WrummyTextField(
             modifier = Modifier.fillMaxWidth(),
