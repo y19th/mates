@@ -8,4 +8,5 @@ object MatesApi {
     const val Register = "register/"
     const val Login = "token/"
     const val Profile = "profile/"
+    const val EditProfile = "profile/edit/"
 }

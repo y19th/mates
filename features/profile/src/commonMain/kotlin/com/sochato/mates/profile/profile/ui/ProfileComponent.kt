@@ -8,6 +8,7 @@ import com.sochato.mates.profile.profile.domain.model.ProfileConfig
 import com.sochato.mates.profile.profile.domain.model.toProfileModel
 import com.sochato.mates.profile.profile.domain.state.ProfileState
 import com.sochato.mates.profile.root.RootProfileNavigator
+import com.sochato.mates.profile.root.ui.RootProfileComponent
 
 internal class ProfileComponent(
     componentContext: ComponentContext,
@@ -22,6 +23,14 @@ internal class ProfileComponent(
         when (event) {
             ProfileEvents.OnNavigateBack -> {
                 navigate { navigator.navigateHome() }
+            }
+
+            ProfileEvents.OnNavigateToEdit -> {
+                navigate {
+                    navigator.handleConfiguration(
+                        RootProfileComponent.Configuration.EditProfileConfiguration
+                    )
+                }
             }
 
             ProfileEvents.OnLogout -> {

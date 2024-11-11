@@ -7,4 +7,11 @@
     <string name="profile_library">Библиотека</string>
     <string name="profile_mates_points">Mates points</string>
     <!-- -->
+
+    <!--EDIT PROFILE SCREEN-->
+    <string name="edit_profile_login_placeholder">Никнейм</string>
+    <string name="edit_profile_login_error">Никнейм не может быть пустым</string>
+
+    <string name="edit_profile_desc_placeholder">Статус</string>
+    <!-- -->
 </resources>

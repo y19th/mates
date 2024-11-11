@@ -23,6 +23,7 @@ import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
 import com.sochato.mates.core.util.extension.collectAsImmediateState
+import com.sochato.mates.core.util.extension.noIndicationClickable
 import com.sochato.mates.profile.profile.domain.events.ProfileEvents
 import com.sochato.mates.profile.profile.ui.components.ProfileButton
 import mates.features.profile.generated.resources.Res
@@ -60,7 +61,8 @@ internal fun ProfileScreen(
                 trailingIcon = {
                     Icon(
                         modifier = Modifier
-                            .padding(horizontal = 16.dp),
+                            .padding(horizontal = 16.dp)
+                            .noIndicationClickable { handleEvents(ProfileEvents.OnNavigateToEdit) },
                         painter = painterResource(Res.drawable.ic_gear),
                         contentDescription = null
                     )
