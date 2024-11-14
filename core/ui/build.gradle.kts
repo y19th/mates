@@ -40,6 +40,9 @@ kotlin {
             api(libs.cupertino.core)
             api(libs.cupertino.adaptive)
             api(libs.shimmer.core)
+            api(libs.coil.core)
+            api(libs.coil.compose)
+            api(libs.coil.network.ktor)
         }
     }
 }

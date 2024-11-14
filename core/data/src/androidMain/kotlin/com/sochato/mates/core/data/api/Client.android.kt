@@ -45,7 +45,7 @@ internal actual val client: HttpClient = HttpClient(OkHttp) {
                 )
             }
         }
-        level = if (MatesSettings.properties.debug) LogLevel.INFO else LogLevel.NONE
+        level = if (MatesSettings.properties.debug) LogLevel.BODY else LogLevel.NONE
     }
     //install(PlutoKtorInterceptor)
 }

@@ -10,5 +10,7 @@ internal sealed interface EditProfileEvents: BaseEvents {
 
     data class OnStatusChange(val newValue: String): EditProfileEvents
 
+    data object OnOpenEditPhotoSheet: EditProfileEvents
+
     data object OnValidate: EditProfileEvents
 }

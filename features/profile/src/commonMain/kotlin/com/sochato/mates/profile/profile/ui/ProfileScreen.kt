@@ -1,17 +1,13 @@
 package com.sochato.mates.profile.profile.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sochato.mates.core.ui.components.VerticalSpacer
@@ -26,11 +22,11 @@ import com.sochato.mates.core.util.base_components.rememberHandleEvents
 import com.sochato.mates.core.util.extension.collectAsImmediateState
 import com.sochato.mates.core.util.extension.noIndicationClickable
 import com.sochato.mates.profile.profile.domain.events.ProfileEvents
+import com.sochato.mates.profile.profile.ui.components.ProfileAsyncIcon
 import com.sochato.mates.profile.profile.ui.components.ProfileButton
 import mates.features.profile.generated.resources.Res
 import mates.features.profile.generated.resources.ic_friends
 import mates.features.profile.generated.resources.ic_gear
-import mates.features.profile.generated.resources.icon_default_profile
 import mates.features.profile.generated.resources.icon_games
 import mates.features.profile.generated.resources.icon_mates_points
 import mates.features.profile.generated.resources.profile_library
@@ -39,7 +35,6 @@ import mates.features.profile.generated.resources.profile_mates_points
 import mates.features.profile.generated.resources.profile_title
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,12 +70,8 @@ internal fun ProfileScreen(
             )
         }
     ) {
-        Image(
-            modifier = Modifier
-                .size(90.dp)
-                .clip(CircleShape),
-            imageVector = vectorResource(Res.drawable.icon_default_profile),
-            contentDescription = null
+        ProfileAsyncIcon(
+            url = state.value.model.pictureUrl
         )
 
         VerticalSpacer(height = 8.dp)
@@ -95,7 +86,7 @@ internal fun ProfileScreen(
         VerticalSpacer(height = 2.dp)
 
         TextRegular(
-            text = state.value.model.profileDescription,
+            text = state.value.model.toString(),
             fontSize = 16.sp,
             lineHeight = 24.sp,
             color = wrummyColorPalette.profileSecondaryColor

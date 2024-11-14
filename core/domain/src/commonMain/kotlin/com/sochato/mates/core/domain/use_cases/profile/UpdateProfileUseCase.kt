@@ -5,6 +5,8 @@ import com.sochato.mates.core.domain.BaseUseCase
 import com.sochato.mates.core.domain.mapper.toProfileModel
 import com.sochato.mates.core.domain.models.WrummyDispatchers
 import com.sochato.mates.core.domain.use_cases.user.UpdateUserUseCase
+import io.ktor.client.request.forms.FormPart
+import io.ktor.client.request.forms.formData
 import kotlinx.coroutines.withContext
 
 class UpdateProfileUseCase(
@@ -15,13 +17,20 @@ class UpdateProfileUseCase(
     suspend operator fun invoke(
         nickname: String,
         description: String,
-        imageUrl: String?
+        imagePart: FormPart<ByteArray>?
     ) = withContext(context) {
+        if (imagePart != null)
+            repository.patchProfilePhoto(
+                body = formData {
+                    append(imagePart)
+                }
+            ).onFailure { throw it }
+
         repository.patchProfile(
             newNickname = nickname,
-            newProfileDescription = description,
-            newProfileImage = imageUrl
-        ).mapCatching { it.toProfileModel() }
-            .onSuccess { updateUser(it) }
+            newProfileDescription = description
+        ).mapCatching {
+            it.toProfileModel()
+        }.onSuccess { updateUser(it) }
     }
 }

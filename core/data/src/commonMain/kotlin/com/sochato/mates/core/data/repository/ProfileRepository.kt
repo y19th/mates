@@ -3,11 +3,14 @@ package com.sochato.mates.core.data.repository
 import com.sochato.mates.core.data.api.MatesApi
 import com.sochato.mates.core.data.extension.fetchResponse
 import com.sochato.mates.core.data.model.request.PatchProfileRequest
+import com.sochato.mates.core.data.model.response.PatchProfilePhotoResponse
 import com.sochato.mates.core.data.model.response.ProfileResponse
 import io.ktor.client.HttpClient
+import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.get
 import io.ktor.client.request.patch
 import io.ktor.client.request.setBody
+import io.ktor.http.content.PartData
 
 interface ProfileRepository {
 
@@ -15,9 +18,12 @@ interface ProfileRepository {
 
     suspend fun patchProfile(
         newNickname: String,
-        newProfileDescription: String,
-        newProfileImage: String?
+        newProfileDescription: String
     ): Result<ProfileResponse>
+
+    suspend fun patchProfilePhoto(
+        body: List<PartData>
+    ): Result<PatchProfilePhotoResponse>
 }
 
 internal class ProfileRepositoryImpl(
@@ -29,23 +35,23 @@ internal class ProfileRepositoryImpl(
 
     override suspend fun patchProfile(
         newNickname: String,
-        newProfileDescription: String,
-        newProfileImage: String?
+        newProfileDescription: String
     ): Result<ProfileResponse> = runCatching {
         client.patch(urlString = MatesApi.EditProfile) {
-            val body = if (newProfileImage != null)
-                PatchProfileRequest.ProfileRequestWithImage(
-                    nickname = newNickname,
-                    profileDescription = newProfileDescription,
-                    imageUrl = newProfileImage
-                )
-            else
-                PatchProfileRequest.ProfileRequest(
-                    nickname = newNickname,
-                    profileDescription = newProfileDescription
-                )
+            val body = PatchProfileRequest.ProfileRequest(
+                nickname = newNickname,
+                profileDescription = newProfileDescription
+            )
 
             setBody(body)
+        }.fetchResponse()
+    }
+
+    override suspend fun patchProfilePhoto(
+        body: List<PartData>
+    ): Result<PatchProfilePhotoResponse> = runCatching {
+        client.patch(urlString = MatesApi.UpdatePicture) {
+            setBody(MultiPartFormDataContent(body))
         }.fetchResponse()
     }
 }
