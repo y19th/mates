@@ -11,15 +11,6 @@ import java.io.File
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-actual fun decodeBitmap(uri: String): ByteArray {
-    File(uri).let { bitmapFile ->
-        if (bitmapFile.exists())
-            return bitmapFile.readBytes()
-        else
-            throw IllegalStateException("file not found")
-    }
-}
-
 @OptIn(ExperimentalUuidApi::class)
 actual fun imageAsFormData(uri: String): FormPart<ByteArray> {
     if (uri.contains("content")) {
