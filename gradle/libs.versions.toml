@@ -4,9 +4,7 @@ android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
 androidx-activityCompose = "1.9.3"
-androidx-lifecycle = "2.8.3"
-compose-multiplatform = "1.7.0"
-compose-plugin = "1.7.0"
+compose-plugin = "1.7.1"
 kotlin = "2.0.21"
 decompose = "3.2.1"
 ktor-version = "3.0.1"
@@ -28,12 +26,9 @@ coilVersion = "3.0.2"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
-androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 
 decompose-jetbrains = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
-decompose-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "decompose-lifecycle-coroutine" }
 decompose-coroutine = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "decompose-lifecycle-coroutine" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
@@ -44,7 +39,6 @@ androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.r
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlin-datetime" }
 
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
