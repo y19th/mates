@@ -39,7 +39,12 @@ internal class EditProfileComponent(
             componentContext = childComponentContext,
             onDismissed = dialogNavigation::dismiss,
             updateImage = { uri ->
-                update { it.copy(profileIcon = uri) }
+                update {
+                    it.copy(
+                        profileIcon = uri,
+                        isNewImageChosen = true
+                    )
+                }
             }
         )
     }
@@ -59,7 +64,7 @@ internal class EditProfileComponent(
                 }
             }
 
-            is EditProfileEvents.OnStatusChange -> {
+            is EditProfileEvents.OnDescriptionChange -> {
                 update {
                     it.copy(
                         profileDescription = event.newValue
@@ -78,7 +83,8 @@ internal class EditProfileComponent(
                             updateProfile(
                                 nickname = nickname,
                                 description = profileDescription,
-                                imagePart = if (profileIcon != null) imageAsFormData(profileIcon) else null
+                                imagePart = if (profileIcon != null && isNewImageChosen)
+                                    imageAsFormData(profileIcon) else null
                             )
                         }.onSuccess {
                             snackEffect(SnackState.success("success"))

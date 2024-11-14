@@ -81,7 +81,7 @@ internal fun EditProfileScreen(
             value = state.profileDescription,
             placeholder = stringResource(Res.string.edit_profile_desc_placeholder),
             onValueChange = {
-                handleEvents(EditProfileEvents.OnStatusChange(it))
+                handleEvents(EditProfileEvents.OnDescriptionChange(it))
             }
         )
 

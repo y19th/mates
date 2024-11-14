@@ -8,7 +8,8 @@ internal data class EditProfileState(
     val nickname: String = "",
     val profileDescription: String = "",
 
-    val isNicknameError: Boolean = false
+    val isNicknameError: Boolean = false,
+    val isNewImageChosen: Boolean = false
 ): BaseState {
     constructor(config: ProfileConfig): this(
         profileIcon = config.pictureUrl,

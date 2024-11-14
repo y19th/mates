@@ -21,9 +21,7 @@ class UpdateProfileUseCase(
     ) = withContext(context) {
         if (imagePart != null)
             repository.patchProfilePhoto(
-                body = formData {
-                    append(imagePart)
-                }
+                body = formData { append(imagePart) }
             ).onFailure { throw it }
 
         repository.patchProfile(

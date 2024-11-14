@@ -38,7 +38,7 @@ internal class ProfileRepositoryImpl(
         newProfileDescription: String
     ): Result<ProfileResponse> = runCatching {
         client.patch(urlString = MatesApi.EditProfile) {
-            val body = PatchProfileRequest.ProfileRequest(
+            val body = PatchProfileRequest(
                 nickname = newNickname,
                 profileDescription = newProfileDescription
             )

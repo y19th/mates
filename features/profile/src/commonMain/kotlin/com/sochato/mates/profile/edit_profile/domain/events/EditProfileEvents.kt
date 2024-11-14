@@ -8,7 +8,7 @@ internal sealed interface EditProfileEvents: BaseEvents {
 
     data class OnNicknameChange(val newValue: String): EditProfileEvents
 
-    data class OnStatusChange(val newValue: String): EditProfileEvents
+    data class OnDescriptionChange(val newValue: String): EditProfileEvents
 
     data object OnOpenEditPhotoSheet: EditProfileEvents
 
