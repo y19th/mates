@@ -26,6 +26,10 @@ object MatesSettings {
     var token: Token
         get() = settings[Keys.TOKEN, Token.Unspecified].decode()
         set(value) = settings.putString(Keys.TOKEN, value.encode())
+
+    var nickname: String
+        get() = settings[Keys.NICKNAME, ""]
+        set(value) = settings.putString(Keys.NICKNAME, value)
 }
 
 private object Keys {
@@ -34,4 +38,5 @@ private object Keys {
     const val HOME = "first_home"
     const val ONBOARDING = "onboarding"
     const val TOKEN = "token"
+    const val NICKNAME = "nickname"
 }

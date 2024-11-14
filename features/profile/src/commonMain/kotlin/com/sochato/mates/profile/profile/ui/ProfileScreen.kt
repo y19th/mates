@@ -90,7 +90,7 @@ internal fun ProfileScreen(
         VerticalSpacer(height = 2.dp)
 
         TextRegular(
-            text = "в mates с сентября 2023",
+            text = state.value.model.profileDescription,
             fontSize = 16.sp,
             lineHeight = 24.sp,
             color = wrummyColorPalette.profileSecondaryColor
