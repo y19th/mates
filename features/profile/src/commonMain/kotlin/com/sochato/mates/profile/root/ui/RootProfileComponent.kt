@@ -2,7 +2,6 @@ package com.sochato.mates.profile.root.ui
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.childStack
-import com.sochato.mates.core.domain.models.ProfileModel
 import com.sochato.mates.core.util.base_components.BaseComponent
 import com.sochato.mates.core.util.extension.getComponent
 import com.sochato.mates.profile.edit_profile.ui.EditProfileComponent
@@ -14,7 +13,6 @@ import kotlinx.serialization.Serializable
 class RootProfileComponent(
     componentContext: ComponentContext,
     navigator: RootProfileNavigator,
-    private var profileConfig: ProfileConfig
 ) : BaseComponent(componentContext) {
 
     val childStack = childStack(
@@ -30,23 +28,15 @@ class RootProfileComponent(
         componentContext: ComponentContext
     ): Child = when (configuration) {
         Configuration.ProfileConfiguration -> {
-            Child.ProfileChild(
-                getComponent(
-                    context = componentContext,
-                    param = profileConfig
-                )
-            )
+            Child.ProfileChild(getComponent(context = componentContext))
         }
 
-        Configuration.EditProfileConfiguration -> {
+        is Configuration.EditProfileConfiguration -> {
             Child.EditProfileConfiguration(
                 component = getComponent(
                     context = componentContext,
-                    param = profileConfig
-                ),
-                onSuccess = {
-                    profileConfig = ProfileConfig(it)
-                }
+                    param = configuration.config
+                )
             )
         }
     }
@@ -55,10 +45,7 @@ class RootProfileComponent(
 
         internal data class ProfileChild(val component: ProfileComponent) : Child()
 
-        internal data class EditProfileConfiguration(
-            val component: EditProfileComponent,
-            val onSuccess: (ProfileModel) -> Unit
-        ) : Child()
+        internal data class EditProfileConfiguration(val component: EditProfileComponent) : Child()
 
     }
 
@@ -69,7 +56,9 @@ class RootProfileComponent(
         data object ProfileConfiguration : Configuration()
 
         @Serializable
-        data object EditProfileConfiguration : Configuration()
+        data class EditProfileConfiguration(
+            val config: ProfileConfig
+        ) : Configuration()
     }
 
 }

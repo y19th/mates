@@ -8,6 +8,8 @@ import com.sochato.mates.core.domain.use_cases.profile.UpdateProfileUseCase
 import com.sochato.mates.core.domain.use_cases.register.RequestRegisterUseCase
 import com.sochato.mates.core.domain.use_cases.transition.ReceiveTransitionUseCase
 import com.sochato.mates.core.domain.use_cases.transition.UpdateTransitionUseCase
+import com.sochato.mates.core.domain.use_cases.user.ReceiveUserUseCase
+import com.sochato.mates.core.domain.use_cases.user.UpdateUserUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
@@ -20,4 +22,6 @@ val domainModule = module {
     factoryOf(::RequestProfileUseCase)
     factoryOf(::LogoutUseCase)
     factoryOf(::UpdateProfileUseCase)
+    factoryOf(::ReceiveUserUseCase)
+    factoryOf(::UpdateUserUseCase)
 }

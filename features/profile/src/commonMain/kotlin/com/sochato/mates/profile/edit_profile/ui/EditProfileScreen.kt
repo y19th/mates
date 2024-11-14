@@ -9,12 +9,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.sochato.mates.core.domain.models.ProfileModel
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.WrummyColumn
 import com.sochato.mates.core.ui.components.bars.BackNavigationIcon
@@ -23,7 +21,6 @@ import com.sochato.mates.core.ui.components.buttons.RoundedButton
 import com.sochato.mates.core.ui.components.inputs.WrummyTextField
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
 import com.sochato.mates.core.util.extension.collectAsImmediateState
-import com.sochato.mates.profile.edit_profile.domain.effect.EditProfileEffect
 import com.sochato.mates.profile.edit_profile.domain.events.EditProfileEvents
 import mates.features.profile.generated.resources.Res
 import mates.features.profile.generated.resources.edit_profile_desc_placeholder
@@ -36,18 +33,10 @@ import org.jetbrains.compose.resources.vectorResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun EditProfileScreen(
-    component: EditProfileComponent,
-    onSuccess: (ProfileModel) -> Unit
+    component: EditProfileComponent
 ) {
     val state by component.state.collectAsImmediateState()
     val handleEvents = component.rememberHandleEvents()
-
-    LaunchedEffect(Unit) {
-        component.sideEffects.collect {
-            if (it is EditProfileEffect.OnSuccessEditProfileEffect)
-                onSuccess(it.model)
-        }
-    }
 
     WrummyColumn(
         modifier = Modifier

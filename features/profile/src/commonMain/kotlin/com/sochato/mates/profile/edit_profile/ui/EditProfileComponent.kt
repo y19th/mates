@@ -2,11 +2,10 @@ package com.sochato.mates.profile.edit_profile.ui
 
 import com.arkivanov.decompose.ComponentContext
 import com.sochato.mates.core.domain.use_cases.profile.UpdateProfileUseCase
-import com.sochato.mates.core.util.base_components.EffectComponent
+import com.sochato.mates.core.util.base_components.ScreenComponent
 import com.sochato.mates.core.util.local.debugMessage
 import com.sochato.mates.core.util.local.findWrummyException
 import com.sochato.mates.core.util.models.SnackState
-import com.sochato.mates.profile.edit_profile.domain.effect.EditProfileEffect
 import com.sochato.mates.profile.edit_profile.domain.events.EditProfileEvents
 import com.sochato.mates.profile.edit_profile.domain.state.EditProfileState
 import com.sochato.mates.profile.profile.domain.model.ProfileConfig
@@ -17,7 +16,7 @@ internal class EditProfileComponent(
     config: ProfileConfig,
     private val profileNavigator: RootProfileNavigator,
     private val updateProfile: UpdateProfileUseCase
-) : EffectComponent<EditProfileState, EditProfileEvents, EditProfileEffect>(
+) : ScreenComponent<EditProfileState, EditProfileEvents>(
     initialState = EditProfileState(config),
     componentContext = componentContext
 ) {
@@ -55,7 +54,6 @@ internal class EditProfileComponent(
                             )
                         }.onSuccess {
                             snackEffect(SnackState.success("success"))
-                            sideEffect(EditProfileEffect.OnSuccessEditProfileEffect(it))
                             navigate {
                                 profileNavigator.pop()
                             }

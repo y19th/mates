@@ -24,10 +24,7 @@ fun RootProfileScreen(
             }
 
             is RootProfileComponent.Child.EditProfileConfiguration -> {
-                EditProfileScreen(
-                    component = instance.component,
-                    onSuccess = instance.onSuccess
-                )
+                EditProfileScreen(component = instance.component)
             }
         }
     }

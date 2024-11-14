@@ -16,6 +16,7 @@ import com.sochato.mates.core.ui.components.bars.WrummyTopBar
 import com.sochato.mates.core.ui.components.inputs.SearchTextField
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 import com.sochato.mates.core.util.extension.noIndicationClickable
+import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.home.main.domain.events.MainEvents
 import mates.features.home.generated.resources.Res
 import mates.features.home.generated.resources.icon_profile
@@ -43,7 +44,7 @@ internal fun DataContent(
                     resource = if (isFirstLaunch)
                         Res.string.main_top_bar_title else Res.string.main_top_bar_title_again
                 ),
-                contentText = model.nickname,
+                contentText = MatesSettings.nickname,
                 trailingIcon = {
                     Icon(
                         modifier = Modifier
