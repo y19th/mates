@@ -25,6 +25,7 @@ import com.sochato.mates.profile.edit_profile.slot.domain.effect.EditPhotoEffect
 import com.sochato.mates.profile.edit_profile.slot.domain.events.EditPhotoEvents
 import com.sochato.mates.profile.edit_profile.slot.ui.components.EditPhotoButton
 import com.sochato.mates.profile.shared.PickPhoto
+import com.sochato.mates.profile.shared.TakePhoto
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,50 +35,65 @@ internal fun EditPhotoScreen(
     val state = rememberModalBottomSheetState()
     val handleEvents = component.rememberHandleEvents()
     val isPickerVisible = remember { mutableStateOf(false) }
+    val isCameraVisible = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         component.sideEffects.collect {
-            if (it is EditPhotoEffect.OnOpenGallery)
-                isPickerVisible.value = !isPickerVisible.value
+            when (it) {
+                EditPhotoEffect.OnOpenCamera -> {
+                    isCameraVisible.value = !isCameraVisible.value
+                }
+
+                EditPhotoEffect.OnOpenGallery -> {
+                    isPickerVisible.value = !isPickerVisible.value
+                }
+
+                null -> {
+                    Unit
+                }
+            }
         }
     }
 
-    if(isPickerVisible.value)
+    if (isPickerVisible.value)
         PickPhoto { handleEvents(EditPhotoEvents.OnPhotoTaken(it)) }
+    if (isCameraVisible.value)
+        TakePhoto { handleEvents(EditPhotoEvents.OnPhotoTaken(it)) }
 
-    ModalBottomSheet(
-        sheetState = state,
-        containerColor = Color.White,
-        onDismissRequest = {
-            handleEvents(EditPhotoEvents.OnDismiss)
-        },
-        contentWindowInsets = { WindowInsets.systemBars.only(WindowInsetsSides.Bottom) }
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 24.dp)
+
+        ModalBottomSheet(
+            sheetState = state,
+            containerColor = Color.White,
+            onDismissRequest = {
+                handleEvents(EditPhotoEvents.OnDismiss)
+            },
+            contentWindowInsets = { WindowInsets.systemBars.only(WindowInsetsSides.Bottom) }
         ) {
-            VerticalSpacer(height = 16.dp)
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 24.dp)
+            ) {
+                VerticalSpacer(height = 16.dp)
 
-            EditPhotoButton(
-                title = "Выбрать из галереи",
-                icon = Icons.Default.Image,
-                onClick = {
-                    handleEvents(EditPhotoEvents.OnTakePhotoFromGallery)
-                }
-            )
+                EditPhotoButton(
+                    title = "Выбрать из галереи",
+                    icon = Icons.Default.Image,
+                    onClick = {
+                        handleEvents(EditPhotoEvents.OnTakePhotoFromGallery)
+                    }
+                )
 
-            VerticalSpacer(height = 16.dp)
+                VerticalSpacer(height = 16.dp)
 
-            EditPhotoButton(
-                title = "Сделать фото",
-                icon = Icons.Default.PhotoCamera,
-                onClick = {
+                EditPhotoButton(
+                    title = "Сделать фото",
+                    icon = Icons.Default.PhotoCamera,
+                    onClick = {
+                        handleEvents(EditPhotoEvents.OnShootPhoto)
+                    }
+                )
 
-                }
-            )
-
-            VerticalSpacer(height = 24.dp)
+                VerticalSpacer(height = 24.dp)
+            }
         }
-    }
 }

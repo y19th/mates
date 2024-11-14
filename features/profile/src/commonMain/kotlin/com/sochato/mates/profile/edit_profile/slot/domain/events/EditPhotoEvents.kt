@@ -8,5 +8,7 @@ internal sealed interface EditPhotoEvents: BaseEvents {
 
     data object OnTakePhotoFromGallery: EditPhotoEvents
 
+    data object OnShootPhoto: EditPhotoEvents
+
     data class OnPhotoTaken(val imageUri: String): EditPhotoEvents
 }

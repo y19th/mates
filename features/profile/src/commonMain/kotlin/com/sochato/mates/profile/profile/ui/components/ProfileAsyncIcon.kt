@@ -1,9 +1,11 @@
 package com.sochato.mates.profile.profile.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,6 +26,11 @@ internal fun ProfileAsyncIcon(
             modifier = Modifier
                 .size(90.dp)
                 .clip(CircleShape)
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outline,
+                    shape = CircleShape
+                )
                 .then(modifier),
             model = url,
             contentDescription = null,

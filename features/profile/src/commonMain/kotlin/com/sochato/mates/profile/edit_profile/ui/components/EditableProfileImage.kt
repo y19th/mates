@@ -40,6 +40,11 @@ internal fun EditableProfileImage(
                 modifier = Modifier
                     .size(90.dp)
                     .clip(CircleShape)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.outline,
+                        shape = CircleShape
+                    )
                     .clickable(onClick = onClick),
                 model = url,
                 contentDescription = null,

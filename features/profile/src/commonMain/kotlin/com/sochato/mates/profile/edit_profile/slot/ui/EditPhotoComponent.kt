@@ -21,6 +21,10 @@ internal class EditPhotoComponent(
                 sideEffect(EditPhotoEffect.OnOpenGallery)
             }
 
+            EditPhotoEvents.OnShootPhoto -> {
+                sideEffect(EditPhotoEffect.OnOpenCamera)
+            }
+
             EditPhotoEvents.OnDismiss -> {
                 navigate { onDismissed() }
             }
@@ -33,6 +37,7 @@ internal class EditPhotoComponent(
                 else
                     snackEffect(SnackState.failure("failed to take image"))
             }
+
         }
     }
 }

@@ -86,7 +86,7 @@ internal fun ProfileScreen(
         VerticalSpacer(height = 2.dp)
 
         TextRegular(
-            text = state.value.model.toString(),
+            text = state.value.model.profileDescription,
             fontSize = 16.sp,
             lineHeight = 24.sp,
             color = wrummyColorPalette.profileSecondaryColor
