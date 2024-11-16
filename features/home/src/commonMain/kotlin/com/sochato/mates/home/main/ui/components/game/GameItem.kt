@@ -1,11 +1,10 @@
 package com.sochato.mates.home.main.ui.components.game
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,18 +17,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.SubcomposeAsyncImage
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 import com.sochato.mates.home.main.ui.components.ProceedRow
 import com.sochato.mates.home.main.ui.components.ProceedRowColors
 import mates.features.home.generated.resources.Res
-import mates.features.home.generated.resources.default_game_image
 import mates.features.home.generated.resources.icon_add
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 internal fun GameItem(
+    image: String?,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
@@ -39,12 +38,13 @@ internal fun GameItem(
             .clip(RoundedCornerShape(10.dp))
             .clickable(onClick = onClick)
     ) {
-        Image(
+        SubcomposeAsyncImage(
             modifier = Modifier
-                .fillMaxSize(),
-            painter = painterResource(Res.drawable.default_game_image),
+                .fillMaxWidth()
+                .height(138.dp),
+            model = image,
             contentScale = ContentScale.Crop,
-            contentDescription = null
+            contentDescription = null,
         )
 
         ProceedRow(

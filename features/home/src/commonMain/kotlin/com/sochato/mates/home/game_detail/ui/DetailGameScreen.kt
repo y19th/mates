@@ -67,7 +67,9 @@ internal fun DetailGameScreen(
                     modifier = Modifier
                         .padding(horizontal = 16.dp),
                     title = "Добавить игру",
-                    onClick = { }
+                    onClick = {
+                        handleEvents(DetailGameEvents.OnAddGameInProfileLibrary)
+                    }
                 )
             }
         }

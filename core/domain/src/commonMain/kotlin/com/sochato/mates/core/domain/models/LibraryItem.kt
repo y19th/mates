@@ -6,6 +6,7 @@ data class LibraryItem(
     val description: String,
     val publisher: String,
     val releaseDate: String,
+    val image: String?,
     val platforms: List<String>,
     val genres: List<String>
 )

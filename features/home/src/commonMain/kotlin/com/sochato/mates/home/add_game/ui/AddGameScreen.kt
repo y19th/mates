@@ -75,6 +75,7 @@ internal fun AddGameScreen(
                 GameItem(
                     modifier = Modifier
                         .padding(vertical = 8.dp),
+                    image = item.image,
                     onClick = {
                         handleEvents(AddGameEvents.OnNavigateToDetail(item))
                     }

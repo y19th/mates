@@ -10,6 +10,7 @@ data class LibraryItemResponse(
     val description: String,
     val publisher: String,
     @SerialName("release_data") val releaseDate: String,
+    val image: String?,
     val platforms: List<String>,
     val genres: List<String>
 )
