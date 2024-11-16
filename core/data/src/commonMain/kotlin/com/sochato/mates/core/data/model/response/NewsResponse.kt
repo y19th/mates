@@ -10,5 +10,5 @@ data class NewsItemResponse(
     val content: String,
     @SerialName("created_at") val createdAt: String,
     val author: String,
-    val game: String
+    val game: String? = null
 )

@@ -23,6 +23,12 @@ kermit = "2.0.4"
 cupertinoVersion = "0.1.0-alpha04"
 shimmer = "1.3.1"
 coilVersion = "3.0.2"
+junit = "1.2.1"
+espressoCore = "3.6.1"
+uiautomator = "2.3.0"
+benchmarkMacroJunit4 = "1.3.3"
+baselineprofile = "1.2.4"
+profileinstaller = "1.4.1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -68,6 +74,11 @@ shimmer-core = { group = "com.valentinilk.shimmer", name = "compose-shimmer", ve
 coil-core = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coilVersion"}
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilVersion"}
 coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coilVersion"}
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
+androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -78,6 +89,9 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "kspVerison" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildKonfig-plugin = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
+android-test = { id = "com.android.test", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
 
 [bundles]
 ktor-core = ["ktor-cio", "ktor-content-negotiation", "ktor-content-serializator", "ktor-content-logger", "ktor-core", "ktor-auth"]
