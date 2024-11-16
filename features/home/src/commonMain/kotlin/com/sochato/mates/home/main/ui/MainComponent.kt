@@ -77,13 +77,8 @@ internal class MainComponent(
                 requestNews()
                     .onSuccess { news ->
                         val hashMap = hashMapOf<String, MutableList<MainNews>>()
-                        val new = news.toMutableList().also {
-                            repeat(100) { time ->
-                                it.add(news[0].copy(id = (time + 100).toString()))
-                            }
-                        }
 
-                        new.forEach { item ->
+                        news.forEach { item ->
                             hashMap.getOrPut(
                                 key = item.game,
                                 defaultValue = { mutableListOf() }

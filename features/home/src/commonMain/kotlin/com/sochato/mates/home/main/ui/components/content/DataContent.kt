@@ -22,6 +22,7 @@ import com.sochato.mates.home.main.domain.events.MainEvents
 import com.sochato.mates.home.main.domain.state.MainState
 import com.sochato.mates.home.main.ui.components.CollapseState
 import com.sochato.mates.home.main.ui.components.CollapsingMainTopBar
+import com.sochato.mates.home.main.ui.components.GamesSection
 import com.sochato.mates.home.main.ui.components.news.NewsItem
 import com.sochato.mates.home.main.ui.components.news.NewsItemTitle
 import com.sochato.mates.home.main.ui.components.news.NewsSection
@@ -79,6 +80,13 @@ internal fun DataContent(
                     }
                 )
             }
+            item {
+                GamesSection(
+                    items = listOf("2", "3"),
+                    handleEvents = handleEvents
+                )
+            }
+
             item { NewsSection() }
             item { VerticalSpacer(height = 32.dp) }
             keys.forEach { key ->
