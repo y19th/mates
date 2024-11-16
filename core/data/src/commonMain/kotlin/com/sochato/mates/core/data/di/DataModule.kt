@@ -9,6 +9,8 @@ import com.sochato.mates.core.data.extension.defaultClient
 import com.sochato.mates.core.data.extension.qualifiedSingle
 import com.sochato.mates.core.data.repository.LoginRepository
 import com.sochato.mates.core.data.repository.LoginRepositoryImpl
+import com.sochato.mates.core.data.repository.NewsRepository
+import com.sochato.mates.core.data.repository.NewsRepositoryImpl
 import com.sochato.mates.core.data.repository.ProfileRepository
 import com.sochato.mates.core.data.repository.ProfileRepositoryImpl
 import com.sochato.mates.core.data.repository.RegistrationRepository
@@ -23,4 +25,5 @@ val dataModule = module {
     factory { RegistrationRepositoryImpl(defaultClient()) }.bind<RegistrationRepository>()
     factory { LoginRepositoryImpl(defaultClient()) }.bind<LoginRepository>()
     factory { ProfileRepositoryImpl(authorizedClient()) }.bind<ProfileRepository>()
+    factory { NewsRepositoryImpl(authorizedClient()) }.bind<NewsRepository>()
 }

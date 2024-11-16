@@ -13,4 +13,6 @@ object MatesApi {
     const val UpdatePicture = "profile/update-picture/"
 
     const val RefreshToken = "token/refresh/"
+
+    const val NewsRequest = "news/"
 }

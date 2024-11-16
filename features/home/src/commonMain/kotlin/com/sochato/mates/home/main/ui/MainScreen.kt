@@ -8,7 +8,6 @@ import com.sochato.mates.core.ui.ErrorContent
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
 import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.home.main.domain.events.MainEvents
-import com.sochato.mates.home.main.domain.state.MainState
 import com.sochato.mates.home.main.ui.components.content.DataContent
 import com.sochato.mates.home.main.ui.components.content.LoadingContent
 
@@ -25,23 +24,23 @@ internal fun MainScreen(
             handleEvents(MainEvents.OnFirstLaunch)
     }
 
-    when (val instance = state.value) {
-        is MainState.Data -> {
-            DataContent(
-                isFirstLaunch = isFirst,
-                model = instance.model,
-                handleEvents = handleEvents
-            )
+    when {
+        state.value.isLoading -> {
+            LoadingContent()
         }
 
-        MainState.Error -> {
+        state.value.isError -> {
             ErrorContent(
                 onRefresh = { handleEvents(MainEvents.OnRefresh) }
             )
         }
 
-        MainState.Loading -> {
-            LoadingContent()
+        else -> {
+            DataContent(
+                isFirstLaunch = isFirst,
+                model = state.value,
+                handleEvents = handleEvents
+            )
         }
     }
 

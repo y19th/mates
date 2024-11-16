@@ -2,15 +2,16 @@ package com.sochato.mates.home.main.domain.state
 
 import com.sochato.mates.core.domain.models.ProfileModel
 import com.sochato.mates.core.util.base_components.BaseState
+import com.sochato.mates.home.main.domain.model.MainNews
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.persistentMapOf
 
-internal sealed class MainState: BaseState {
+internal data class MainState(
+    val isLoading: Boolean = false,
+    val isError: Boolean = false,
 
-    data class Data(
-        val searchRequest: String = "",
-        val model: ProfileModel
-    ) : MainState()
-
-    data object Loading: MainState()
-
-    data object Error: MainState()
-}
+    val searchRequest: String = "",
+    val model: ProfileModel = ProfileModel(),
+    val news: ImmutableMap<String, ImmutableList<MainNews>> = persistentMapOf()
+) : BaseState

@@ -1,8 +1,14 @@
 package com.sochato.mates.core.ui.components.bars
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -21,6 +27,7 @@ import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -51,6 +58,49 @@ fun NavigationTopBar(
         actions = trailingIcon,
         scrollBehavior = scrollBehavior
     )
+}
+
+@Composable
+fun CollapsingMatesTopBar(
+    modifier: Modifier = Modifier,
+    uncollapsedContent: @Composable ColumnScope.() -> Unit,
+    collapsedContent: @Composable ColumnScope.() -> Unit,
+    trailingIcon: @Composable () -> Unit,
+    isCollapsed: Boolean = false
+) {
+    val collapsedState = rememberUpdatedState(isCollapsed)
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
+            .padding(horizontal = 24.dp, vertical = 16.dp)
+            .then(modifier),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        AnimatedContent(
+            targetState = collapsedState.value,
+            transitionSpec = {
+                slideInVertically(tween(durationMillis = 200, delayMillis = 200)) { it * 2 }
+                    .togetherWith(fadeOut(tween(durationMillis = 150)))
+            }
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(0.65f),
+                verticalArrangement = Arrangement.Center
+            ) {
+                if (it)
+                    collapsedContent()
+                else
+                    uncollapsedContent()
+            }
+        }
+
+        trailingIcon()
+    }
+
 }
 
 
