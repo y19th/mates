@@ -1,7 +1,6 @@
 package com.sochato.mates.home.game_detail.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -37,7 +36,10 @@ internal fun DetailGameScreen(
             .fillMaxHeight()
             .consumeWindowInsets(WindowInsets.systemBars.only(WindowInsetsSides.Top))
     ) {
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxHeight()
+        ) {
             stickyHeader {
                 BackButton(
                     onClick = {
@@ -46,7 +48,7 @@ internal fun DetailGameScreen(
                 )
 
             }
-            item {
+            item(key = state.value.item.id) {
                 DetailGameCard(
                     modifier = Modifier
                         .offset { IntOffset(0, -40.dp.roundToPx()) },
@@ -55,12 +57,6 @@ internal fun DetailGameScreen(
             }
             item {
                 VerticalSpacer(height = 32.dp)
-            }
-            item {
-                Spacer(
-                    modifier = Modifier
-                        .weight(1f)
-                )
             }
             item {
                 RoundedButton(
@@ -73,7 +69,5 @@ internal fun DetailGameScreen(
                 )
             }
         }
-
-
     }
 }

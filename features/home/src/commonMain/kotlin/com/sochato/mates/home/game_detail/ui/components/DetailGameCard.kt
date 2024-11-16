@@ -13,6 +13,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.SubcomposeAsyncImage
@@ -35,9 +36,10 @@ fun DetailGameCard(
         SubcomposeAsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp),
+                .height(280.dp),
             model = item.image,
             contentDescription = null,
+            contentScale = ContentScale.Crop,
             loading = {
                 Box(
                     modifier = Modifier

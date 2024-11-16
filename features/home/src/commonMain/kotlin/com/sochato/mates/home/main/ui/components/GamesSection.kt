@@ -42,6 +42,7 @@ internal fun GamesSection(
                     modifier = Modifier
                         .width(carItemWidth),
                     image = item.image,
+                    title = item.title,
                     onClick = { }
                 )
 
