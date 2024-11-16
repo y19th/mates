@@ -56,9 +56,15 @@ internal fun EditPhotoScreen(
     }
 
     if (isPickerVisible.value)
-        PickPhoto { handleEvents(EditPhotoEvents.OnPhotoTaken(it)) }
+        PickPhoto {
+            handleEvents(EditPhotoEvents.OnPhotoTaken(it))
+            isPickerVisible.value = false
+        }
     if (isCameraVisible.value)
-        TakePhoto { handleEvents(EditPhotoEvents.OnPhotoTaken(it)) }
+        TakePhoto {
+            handleEvents(EditPhotoEvents.OnPhotoTaken(it))
+            isCameraVisible.value = false
+        }
 
 
         ModalBottomSheet(

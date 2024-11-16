@@ -1,8 +1,11 @@
 package com.sochato.mates.core.data.api
 
+import com.sochato.mates.core.data.model.request.RefreshRequest
+import com.sochato.mates.core.data.repository.LoginRepository
 import com.sochato.mates.core.util.local.LoggerLevel
 import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.message
+import com.sochato.mates.core.util.models.Token
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -17,6 +20,8 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.component.KoinComponent
+import org.koin.java.KoinJavaComponent.getKoin
 
 internal actual val authorizedClient: HttpClient = HttpClient(OkHttp) {
     install(HttpTimeout) {
@@ -30,10 +35,22 @@ internal actual val authorizedClient: HttpClient = HttpClient(OkHttp) {
 
     }
     install(Auth) {
+        val tokens = MatesSettings.token
         bearer {
             loadTokens {
-                MatesSettings.token.let {
-                    BearerTokens(it.access, it.refresh)
+                BearerTokens(tokens.access, tokens.refresh)
+            }
+
+            refreshTokens {
+                (oldTokens?.refreshToken ?: tokens.refresh).let { refresh ->
+                    val result = LoginRepositoryProvider.refreshToken(refresh)
+                        .getOrNull()
+
+                    if (result != null)
+                        BearerTokens(result.access, result.refresh)
+                            .also { MatesSettings.token = result }
+                    else
+                        null
                 }
             }
         }
@@ -60,4 +77,13 @@ internal actual val authorizedClient: HttpClient = HttpClient(OkHttp) {
         level = if (MatesSettings.properties.debug) LogLevel.INFO else LogLevel.NONE
     }
     //install(PlutoKtorInterceptor)
+}
+
+private class LoginRepositoryProvider : KoinComponent {
+
+    companion object {
+        suspend fun refreshToken(refresh: String): Result<Token> {
+            return getKoin().get<LoginRepository>().requestRefresh(RefreshRequest(refresh))
+        }
+    }
 }

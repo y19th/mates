@@ -1,7 +1,6 @@
 package com.sochato.mates.core.domain.use_cases.login
 
 import com.sochato.mates.core.data.model.request.LoginRequest
-import com.sochato.mates.core.data.model.response.LoginResponse
 import com.sochato.mates.core.data.repository.LoginRepository
 import com.sochato.mates.core.domain.BaseUseCase
 import com.sochato.mates.core.domain.mapper.toTokenEntity
@@ -21,7 +20,7 @@ class RequestLoginUseCase(
     suspend operator fun invoke(
         email: String,
         password: String
-    ): Result<LoginResponse> = withContext(context) {
+    ): Result<Token> = withContext(context) {
         repository.requestLogin(
             request = LoginRequest(email, password)
         ).onSuccess {
