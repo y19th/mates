@@ -1,6 +1,7 @@
 package com.sochato.mates.home.main.ui
 
 import com.arkivanov.decompose.ComponentContext
+import com.sochato.mates.core.domain.use_cases.library.RequestProfileLibraryUseCase
 import com.sochato.mates.core.domain.use_cases.news.RequestNewsUseCase
 import com.sochato.mates.core.domain.use_cases.profile.RequestProfileUseCase
 import com.sochato.mates.core.util.base_components.ScreenComponent
@@ -22,7 +23,8 @@ internal class MainComponent(
     componentContext: ComponentContext,
     private val navigator: HomeNavigator,
     private val requestProfile: RequestProfileUseCase,
-    private val requestNews: RequestNewsUseCase
+    private val requestNews: RequestNewsUseCase,
+    private val requestProfileLibrary: RequestProfileLibraryUseCase
 ) : ScreenComponent<MainState, MainEvents>(
     initialState = MainState(),
     componentContext = componentContext
@@ -39,6 +41,12 @@ internal class MainComponent(
 
             MainEvents.OnRefresh -> {
                 refresh()
+            }
+
+            MainEvents.OnNavigateToAddGame -> {
+                navigate {
+                    navigator.handleConfiguration(HomeComponent.Configuration.AddGameConfiguration)
+                }
             }
 
             is MainEvents.OnSearchChange -> {
@@ -74,13 +82,21 @@ internal class MainComponent(
                 }
             }
             launchIO {
+                requestProfileLibrary()
+                    .onSuccess { library ->
+                        update { it.copy(library = library) }
+                    }.onFailure {
+                        update { it.copy(isError = true) }
+                    }
+            }
+            launchIO {
                 requestNews()
                     .onSuccess { news ->
                         val hashMap = hashMapOf<String, MutableList<MainNews>>()
 
                         news.forEach { item ->
                             hashMap.getOrPut(
-                                key = item.game,
+                                key = item.game ?: "",
                                 defaultValue = { mutableListOf() }
                             ).add(item.toMainNews())
                         }

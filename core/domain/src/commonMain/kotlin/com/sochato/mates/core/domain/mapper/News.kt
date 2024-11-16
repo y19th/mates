@@ -11,6 +11,8 @@ fun NewsItemResponse.toNewsModel() = News(
     title = title,
     content = content,
     createdAt = createdAt,
+    updatedAt = updatedAt,
     author = author,
-    game = game ?: ""
+    game = game,
+    image = image
 )

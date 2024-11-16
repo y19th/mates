@@ -12,6 +12,9 @@ object MatesApi {
     const val EditProfile = "profile/edit/"
     const val UpdatePicture = "profile/update-picture/"
 
+    const val ProfileLibrary = "library"
+    const val AllGames = "games/"
+
     const val RefreshToken = "token/refresh/"
 
     const val NewsRequest = "news/"

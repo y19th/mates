@@ -2,6 +2,8 @@ package com.sochato.mates.core.domain.di
 
 import com.sochato.mates.core.domain.models.WrummyDispatchers
 import com.sochato.mates.core.domain.use_cases.LogoutUseCase
+import com.sochato.mates.core.domain.use_cases.library.RequestLibraryUseCase
+import com.sochato.mates.core.domain.use_cases.library.RequestProfileLibraryUseCase
 import com.sochato.mates.core.domain.use_cases.login.RequestLoginUseCase
 import com.sochato.mates.core.domain.use_cases.news.RequestNewsUseCase
 import com.sochato.mates.core.domain.use_cases.profile.RequestProfileUseCase
@@ -26,4 +28,6 @@ val domainModule = module {
     factoryOf(::ReceiveUserUseCase)
     factoryOf(::UpdateUserUseCase)
     factoryOf(::RequestNewsUseCase)
+    factoryOf(::RequestProfileLibraryUseCase)
+    factoryOf(::RequestLibraryUseCase)
 }

@@ -6,6 +6,8 @@ internal sealed interface MainEvents: BaseEvents {
 
     data object OnNavigateToProfile: MainEvents
 
+    data object OnNavigateToAddGame: MainEvents
+
     data object OnFirstLaunch: MainEvents
 
     data object OnRefresh: MainEvents

@@ -82,21 +82,30 @@ internal fun DataContent(
             }
             item {
                 GamesSection(
-                    items = listOf("2", "3"),
+                    items = state.library,
                     handleEvents = handleEvents
                 )
             }
 
-            item { NewsSection() }
-            item { VerticalSpacer(height = 32.dp) }
+            item {
+                NewsSection()
+            }
+            item {
+                VerticalSpacer(height = 32.dp)
+            }
             keys.forEach { key ->
-                item { NewsItemTitle(key) }
+                item {
+                    NewsItemTitle(key)
+                }
                 items(
                     items = state.news.getOrElse(key = key, defaultValue = { persistentListOf() }),
                     key = { it.id },
                     contentType = { it }
                 ) { item ->
                     NewsItem(item = item)
+                }
+                item {
+                    VerticalSpacer(height = 24.dp)
                 }
             }
         }

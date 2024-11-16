@@ -11,16 +11,18 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.sochato.mates.core.domain.models.LibraryItem
 import com.sochato.mates.core.ui.components.HorizontalSpacer
 import com.sochato.mates.core.util.shared.rememberScreenWidth
 import com.sochato.mates.home.main.domain.events.MainEvents
 import com.sochato.mates.home.main.ui.components.game.AddGameItem
 import com.sochato.mates.home.main.ui.components.game.GameItem
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 internal fun GamesSection(
     modifier: Modifier = Modifier,
-    items: List<String>,
+    items: ImmutableList<LibraryItem>,
     handleEvents: (MainEvents) -> Unit
 ) {
     val carItemWidth = rememberScreenWidth() - 52.dp
@@ -34,22 +36,33 @@ internal fun GamesSection(
     ) {
         HorizontalSpacer(width = 16.dp)
 
-        repeat(items.size) { index ->
-            GameItem(
+        if (items.isNotEmpty()) {
+            items.forEach { item ->
+                GameItem(
+                    modifier = Modifier
+                        .width(carItemWidth),
+                    onClick = { }
+                )
+
+                HorizontalSpacer(width = 20.dp)
+            }
+            AddGameItem(
                 modifier = Modifier
-                    .width(carItemWidth),
-                onClick = { }
+                    .width(carItemWidth)
+                    .fillMaxHeight(),
+                onClick = { handleEvents(MainEvents.OnNavigateToAddGame) }
             )
 
-            HorizontalSpacer(width = 20.dp)
-        }
-        AddGameItem(
-            modifier = Modifier
-                .width(carItemWidth)
-                .fillMaxHeight(),
-            onClick = { }
-        )
+            HorizontalSpacer(width = 16.dp)
 
-        HorizontalSpacer(width = 16.dp)
+        } else {
+            AddGameItem(
+                modifier = Modifier
+                    .width(carItemWidth + 16.dp)
+                    .height(138.dp),
+                onClick = { handleEvents(MainEvents.OnNavigateToAddGame) }
+            )
+        }
+
     }
 }

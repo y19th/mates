@@ -9,6 +9,8 @@ data class NewsItemResponse(
     val title: String,
     val content: String,
     @SerialName("created_at") val createdAt: String,
+    @SerialName("updated_at") val updatedAt: String,
     val author: String,
-    val game: String? = null
+    val game: String? = null,
+    val image: String? = null
 )

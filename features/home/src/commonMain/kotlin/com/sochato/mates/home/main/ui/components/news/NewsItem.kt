@@ -1,14 +1,15 @@
 package com.sochato.mates.home.main.ui.components.news
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.SubcomposeAsyncImage
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
@@ -25,32 +27,44 @@ import com.sochato.mates.core.util.extension.shaped
 import com.sochato.mates.home.main.domain.model.MainNews
 import com.sochato.mates.home.main.ui.components.ProceedRow
 import com.sochato.mates.home.main.ui.components.ProceedRowColors
-import mates.features.home.generated.resources.Res
-import mates.features.home.generated.resources.default_news_image
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 internal fun NewsItem(
     item: MainNews
 ) {
+    val offsetModifier = remember(item) {
+        if (item.image != null)
+            Modifier.offset { IntOffset(x = 0, y = -48) }
+        else
+            Modifier
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
             .clip(RoundedCornerShape(20.dp))
     ) {
-        Image(
-            modifier = Modifier
-                .fillMaxSize(),
-            painter = painterResource(Res.drawable.default_news_image),
+        SubcomposeAsyncImage(
+            model = item.image,
             contentScale = ContentScale.Crop,
-            contentDescription = null
+            contentDescription = null,
+            loading = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(28.dp),
+                    contentAlignment = Alignment.TopCenter
+                ) {
+                    LinearProgressIndicator()
+                }
+            }
         )
 
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset { IntOffset(x = 0, y = -48) }
+                .then(offsetModifier)
                 .shaped(
                     shape = RoundedCornerShape(20.dp),
                     backgroundColor = wrummyColorPalette.onPrimaryColor,

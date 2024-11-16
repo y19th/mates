@@ -8,7 +8,8 @@ internal data class MainNews(
     val title: String,
     val content: String,
     val createdAt: String,
-    val author: String
+    val author: String,
+    val image: String?
 )
 
 internal fun News.toMainNews() = MainNews(
@@ -16,5 +17,6 @@ internal fun News.toMainNews() = MainNews(
     title = title,
     content = content,
     createdAt = createdAt,
-    author = author
+    author = author,
+    image = image
 )

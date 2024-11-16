@@ -4,6 +4,9 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.childStack
 import com.sochato.mates.core.util.base_components.BaseComponent
 import com.sochato.mates.core.util.extension.getComponent
+import com.sochato.mates.home.add_game.ui.AddGameComponent
+import com.sochato.mates.home.game_detail.domain.models.LibraryConfig
+import com.sochato.mates.home.game_detail.ui.DetailGameComponent
 import com.sochato.mates.home.main.ui.MainComponent
 import com.sochato.mates.home.root.HomeNavigator
 import com.sochato.mates.profile.profile.domain.model.ProfileConfig
@@ -32,11 +35,24 @@ class HomeComponent(
             Child.MainChild(getComponent(componentContext))
         }
 
+        Configuration.AddGameConfiguration -> {
+            Child.AddGameChild(getComponent(componentContext))
+        }
+
         is Configuration.ProfileConfiguration -> {
             Child.ProfileChild(
                 getComponent(
                     context = componentContext,
                     param = configuration.config
+                )
+            )
+        }
+
+        is Configuration.DetailGameConfiguration -> {
+            Child.DetailGameChild(
+                getComponent(
+                    context = componentContext,
+                    param = configuration.item
                 )
             )
         }
@@ -47,7 +63,11 @@ class HomeComponent(
 
         internal data class MainChild(val component: MainComponent) : Child()
 
+        internal data class AddGameChild(val component: AddGameComponent): Child()
+
         internal data class ProfileChild(val component: RootProfileComponent) : Child()
+
+        internal data class DetailGameChild(val component: DetailGameComponent) : Child()
     }
 
     @Serializable
@@ -55,6 +75,14 @@ class HomeComponent(
 
         @Serializable
         data object MainConfiguration : Configuration()
+
+        @Serializable
+        data object AddGameConfiguration: Configuration()
+
+        @Serializable
+        internal data class DetailGameConfiguration(
+            val item: LibraryConfig
+        ): Configuration()
 
         @Serializable
         data class ProfileConfiguration(

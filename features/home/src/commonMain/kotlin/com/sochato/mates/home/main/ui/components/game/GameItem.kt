@@ -5,8 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -35,7 +35,7 @@ internal fun GameItem(
 ) {
     Box(
         modifier = modifier
-            .defaultMinSize(minHeight = 130.dp)
+            .height(138.dp)
             .clip(RoundedCornerShape(10.dp))
             .clickable(onClick = onClick)
     ) {
@@ -43,7 +43,7 @@ internal fun GameItem(
             modifier = Modifier
                 .fillMaxSize(),
             painter = painterResource(Res.drawable.default_game_image),
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
             contentDescription = null
         )
 
