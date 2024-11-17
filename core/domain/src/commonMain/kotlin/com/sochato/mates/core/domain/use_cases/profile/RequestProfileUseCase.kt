@@ -16,6 +16,8 @@ class RequestProfileUseCase(
     suspend operator fun invoke(): Result<ProfileModel> = withContext(context) {
         repository.requestProfile()
             .mapCatching { it.toProfileModel() }
-            .onSuccess { updateUser(it) }
+            .onSuccess {
+                updateUser(it)
+            }
     }
 }

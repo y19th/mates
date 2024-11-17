@@ -5,7 +5,6 @@ import com.russhwolf.settings.get
 import com.sochato.mates.core.util.extension.decode
 import com.sochato.mates.core.util.extension.encode
 import com.sochato.mates.core.util.models.BuildProperties
-import com.sochato.mates.core.util.models.Token
 
 object MatesSettings {
 
@@ -22,10 +21,6 @@ object MatesSettings {
     var firstHomeLaunch: Boolean
         get() = settings[Keys.HOME, false]
         set(value) = settings.putBoolean(Keys.HOME, value)
-
-    var token: Token
-        get() = settings[Keys.TOKEN, Token.Unspecified].decode()
-        set(value) = settings.putString(Keys.TOKEN, value.encode())
 
     var nickname: String
         get() = settings[Keys.NICKNAME, ""]

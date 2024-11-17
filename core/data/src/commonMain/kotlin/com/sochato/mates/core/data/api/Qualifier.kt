@@ -1,4 +1,4 @@
 package com.sochato.mates.core.data.api
 
-internal val authorizedQualifier = "AuthorizedClient"
-internal val defaultQualifier = "DefaultClient"
+internal const val authorizedQualifier = "AuthorizedClient"
+internal const val defaultQualifier = "DefaultClient"

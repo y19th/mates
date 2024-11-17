@@ -2,6 +2,7 @@ package com.sochato.mates.core.data.api
 
 import com.sochato.mates.core.data.model.request.RefreshRequest
 import com.sochato.mates.core.data.repository.LoginRepository
+import com.sochato.mates.core.data.store.bearerTokenStorage
 import com.sochato.mates.core.util.local.LoggerLevel
 import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.message
@@ -35,20 +36,21 @@ internal actual val authorizedClient: HttpClient = HttpClient(OkHttp) {
 
     }
     install(Auth) {
-        val tokens = MatesSettings.token
         bearer {
             loadTokens {
-                BearerTokens(tokens.access, tokens.refresh)
+                bearerTokenStorage.last()?.let { token ->
+                    BearerTokens(token.access, token.refresh)
+                }
             }
 
             refreshTokens {
-                (oldTokens?.refreshToken ?: tokens.refresh).let { refresh ->
+                (oldTokens?.refreshToken ?: bearerTokenStorage.last()?.refresh)?.let { refresh ->
                     val result = LoginRepositoryProvider.refreshToken(refresh)
                         .getOrNull()
 
                     if (result != null)
                         BearerTokens(result.access, result.refresh)
-                            .also { MatesSettings.token = result }
+                            .also { bearerTokenStorage.add(result) }
                     else
                         null
                 }
@@ -74,7 +76,7 @@ internal actual val authorizedClient: HttpClient = HttpClient(OkHttp) {
                 )
             }
         }
-        level = if (MatesSettings.properties.debug) LogLevel.INFO else LogLevel.NONE
+        level = if (MatesSettings.properties.debug) LogLevel.ALL else LogLevel.NONE
     }
     //install(PlutoKtorInterceptor)
 }

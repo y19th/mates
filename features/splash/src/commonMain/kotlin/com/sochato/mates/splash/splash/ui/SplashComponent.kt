@@ -1,6 +1,7 @@
 package com.sochato.mates.splash.splash.ui
 
 import com.arkivanov.decompose.ComponentContext
+import com.sochato.mates.core.data.store.initializeTokenStorage
 import com.sochato.mates.core.domain.use_cases.transition.ReceiveTransitionUseCase
 import com.sochato.mates.core.util.base_components.ScreenComponent
 import com.sochato.mates.core.util.local.MatesSettings
@@ -19,7 +20,14 @@ class SplashComponent(
     componentContext = componentContext
 ) {
     init {
-        launchIO { update { it.copy(transition = receiveTransition()) } }
+        launchIO {
+            launchIO {
+                update { it.copy(transition = receiveTransition()) }
+            }
+            launchIO {
+                initializeTokenStorage()
+            }
+        }
     }
 
     override fun handleEvent(event: SplashEvents) {

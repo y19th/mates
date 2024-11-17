@@ -34,6 +34,7 @@ kotlin {
             implementation(projects.core.util)
             implementation(projects.core.ui)
             implementation(projects.core.domain)
+            implementation(projects.core.data)
 
             implementation(compose.components.resources)
         }

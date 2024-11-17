@@ -14,4 +14,7 @@ interface UserDao {
 
     @Query("select * from user")
     suspend fun receiveUserEntity(): UserEntity?
+
+    @Query("delete from user")
+    suspend fun deleteUser()
 }

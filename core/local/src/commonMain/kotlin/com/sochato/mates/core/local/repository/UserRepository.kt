@@ -8,6 +8,8 @@ interface UserRepository {
     suspend fun updateUser(entity: UserEntity)
 
     suspend fun receiveUserEntity(): UserEntity?
+
+    suspend fun deleteUser()
 }
 
 internal class UserRepositoryImpl(
@@ -20,5 +22,9 @@ internal class UserRepositoryImpl(
 
     override suspend fun receiveUserEntity(): UserEntity? {
         return dao.receiveUserEntity()
+    }
+
+    override suspend fun deleteUser() {
+        dao.deleteUser()
     }
 }
