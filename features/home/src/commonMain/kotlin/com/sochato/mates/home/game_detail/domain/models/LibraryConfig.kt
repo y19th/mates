@@ -10,6 +10,7 @@ internal data class LibraryConfig(
     val description: String,
     val publisher: String,
     val releaseDate: String,
+    val image: String?,
     val platforms: List<String>,
     val genres: List<String>
 )
@@ -21,7 +22,8 @@ internal fun LibraryItem.toLibraryConfig() = LibraryConfig(
     publisher = publisher,
     releaseDate = releaseDate,
     platforms = platforms,
-    genres = genres
+    genres = genres,
+    image = image
 )
 
 internal fun LibraryConfig.toLibraryItem() = LibraryItem(
@@ -31,5 +33,6 @@ internal fun LibraryConfig.toLibraryItem() = LibraryItem(
     publisher = publisher,
     releaseDate = releaseDate,
     platforms = platforms,
-    genres = genres
+    genres = genres,
+    image = image
 )

@@ -12,6 +12,12 @@ class RequestProfileLibraryUseCase(
 ) : BaseUseCase(dispatchers) {
     suspend operator fun invoke() = withContext(context) {
         repository.requestProfileLibrary()
-            .mapCatching { it.toImmutableLibraryItemModelList() }
+            .mapCatching { games ->
+                repository.requestLibrary()
+                    .getOrThrow()
+                    .filter { library ->
+                        games.find { game -> game.game == library.id } != null
+                    }.toImmutableLibraryItemModelList()
+            }
     }
 }

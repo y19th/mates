@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f2b43786456dad46d338169e4b75626f",
+    "identityHash": "4796af666de428e3070aa808bdcfc97c",
     "entities": [
       {
         "tableName": "transition",
@@ -116,11 +116,63 @@
             "id"
           ]
         }
+      },
+      {
+        "tableName": "games",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `game` INTEGER NOT NULL, `gameTitle` TEXT NOT NULL, `playtime` INTEGER NOT NULL, `rating` INTEGER, `lastPlayed` TEXT, `timeAdded` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "game",
+            "columnName": "game",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameTitle",
+            "columnName": "gameTitle",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playtime",
+            "columnName": "playtime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "lastPlayed",
+            "columnName": "lastPlayed",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "timeAdded",
+            "columnName": "timeAdded",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f2b43786456dad46d338169e4b75626f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4796af666de428e3070aa808bdcfc97c')"
     ]
   }
 }

@@ -14,5 +14,6 @@ fun LibraryItemResponse.toLibraryItemModel() = LibraryItem(
     publisher = publisher,
     releaseDate = releaseDate,
     platforms = platforms,
-    genres = genres
+    genres = genres,
+    image = image
 )
