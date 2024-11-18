@@ -8,6 +8,7 @@ import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.sochato.mates.home.add_game.ui.AddGameScreen
 import com.sochato.mates.home.game_detail.ui.DetailGameScreen
 import com.sochato.mates.home.main.ui.MainScreen
+import com.sochato.mates.home.news_detail.ui.DetailNewsScreen
 import com.sochato.mates.profile.root.ui.RootProfileScreen
 
 @Composable
@@ -35,6 +36,10 @@ fun HomeScreen(
 
             is HomeComponent.Child.DetailGameChild -> {
                 DetailGameScreen(component = instance.component)
+            }
+
+            is HomeComponent.Child.DetailNewsChild -> {
+                DetailNewsScreen(component = instance.component)
             }
         }
     }

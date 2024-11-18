@@ -43,7 +43,7 @@ internal fun GamesSection(
                         .width(carItemWidth),
                     image = item.image,
                     title = item.title,
-                    onClick = { }
+                    onClick = { handleEvents(MainEvents.OnNavigateToDetailGame(item)) }
                 )
 
                 HorizontalSpacer(width = 20.dp)

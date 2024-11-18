@@ -8,6 +8,8 @@ import com.sochato.mates.home.add_game.ui.AddGameComponent
 import com.sochato.mates.home.game_detail.domain.models.LibraryConfig
 import com.sochato.mates.home.game_detail.ui.DetailGameComponent
 import com.sochato.mates.home.main.ui.MainComponent
+import com.sochato.mates.home.news_detail.domain.models.NewsConfig
+import com.sochato.mates.home.news_detail.ui.DetailNewsComponent
 import com.sochato.mates.home.root.HomeNavigator
 import com.sochato.mates.profile.profile.domain.model.ProfileConfig
 import com.sochato.mates.profile.root.ui.RootProfileComponent
@@ -56,6 +58,15 @@ class HomeComponent(
                 )
             )
         }
+
+        is Configuration.DetailNewsConfiguration -> {
+            Child.DetailNewsChild(
+                getComponent(
+                    context = componentContext,
+                    param = configuration.config
+                )
+            )
+        }
     }
 
 
@@ -63,11 +74,13 @@ class HomeComponent(
 
         internal data class MainChild(val component: MainComponent) : Child()
 
-        internal data class AddGameChild(val component: AddGameComponent): Child()
+        internal data class AddGameChild(val component: AddGameComponent) : Child()
 
         internal data class ProfileChild(val component: RootProfileComponent) : Child()
 
         internal data class DetailGameChild(val component: DetailGameComponent) : Child()
+
+        internal data class DetailNewsChild(val component: DetailNewsComponent) : Child()
     }
 
     @Serializable
@@ -77,13 +90,18 @@ class HomeComponent(
         data object MainConfiguration : Configuration()
 
         @Serializable
-        data object AddGameConfiguration: Configuration()
+        data object AddGameConfiguration : Configuration()
 
         @Serializable
         internal data class DetailGameConfiguration(
             val item: LibraryConfig,
             val isAlreadyAdded: Boolean
-        ): Configuration()
+        ) : Configuration()
+
+        @Serializable
+        internal data class DetailNewsConfiguration(
+            val config: NewsConfig
+        ) : Configuration()
 
         @Serializable
         data class ProfileConfiguration(

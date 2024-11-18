@@ -16,10 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.SubcomposeAsyncImage
+import com.sochato.mates.core.ui.components.MatesDefaultImage
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
@@ -42,13 +41,11 @@ internal fun GameItem(
             .clip(RoundedCornerShape(10.dp))
             .clickable(onClick = onClick)
     ) {
-        SubcomposeAsyncImage(
+        MatesDefaultImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(138.dp),
-            model = image,
-            contentScale = ContentScale.Crop,
-            contentDescription = null,
+            url = image
         )
 
         Box(
@@ -81,9 +78,7 @@ internal fun GameItem(
                 .align(Alignment.BottomEnd),
             text = "Перейти",
             colors = ProceedRowColors.Default.colors(),
-            onClick = {
-
-            }
+            onClick = onClick
         )
     }
 }

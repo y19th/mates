@@ -102,7 +102,10 @@ internal fun DataContent(
                     key = { it.id },
                     contentType = { it }
                 ) { item ->
-                    NewsItem(item = item)
+                    NewsItem(
+                        item = item,
+                        onClick = { handleEvents(MainEvents.OnNavigateToDetailNews(item)) }
+                    )
                 }
                 item {
                     VerticalSpacer(height = 24.dp)

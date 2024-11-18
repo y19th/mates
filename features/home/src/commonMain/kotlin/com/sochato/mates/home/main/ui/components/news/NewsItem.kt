@@ -1,5 +1,6 @@
 package com.sochato.mates.home.main.ui.components.news
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,16 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.SubcomposeAsyncImage
+import com.sochato.mates.core.ui.components.MatesDefaultImage
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
@@ -30,25 +29,18 @@ import com.sochato.mates.home.main.ui.components.ProceedRowColors
 
 @Composable
 internal fun NewsItem(
-    item: MainNews
+    item: MainNews,
+    onClick: () -> Unit
 ) {
-    val offsetModifier = remember(item) {
-        if (item.image != null)
-            Modifier.offset { IntOffset(x = 0, y = -48) }
-        else
-            Modifier
-    }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable(onClick = onClick)
             .padding(horizontal = 16.dp)
             .clip(RoundedCornerShape(20.dp))
     ) {
-        SubcomposeAsyncImage(
-            model = item.image,
-            contentScale = ContentScale.Crop,
-            contentDescription = null,
+        MatesDefaultImage(
+            url = item.image,
             loading = {
                 Box(
                     modifier = Modifier
@@ -64,7 +56,7 @@ internal fun NewsItem(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .then(offsetModifier)
+                .offset { IntOffset(x = 0, y = -48) }
                 .shaped(
                     shape = RoundedCornerShape(20.dp),
                     backgroundColor = wrummyColorPalette.onPrimaryColor,
@@ -101,7 +93,7 @@ internal fun NewsItem(
                         .padding(horizontal = 8.dp),
                     text = "Перейти",
                     colors = ProceedRowColors.Inverted.colors(),
-                    onClick = {}
+                    onClick = onClick
                 )
             }
         }

@@ -1,9 +1,6 @@
-package com.sochato.mates.home.game_detail.ui.components
+package com.sochato.mates.home.news_detail.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,18 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sochato.mates.core.domain.models.LibraryItem
 import com.sochato.mates.core.ui.components.MatesDefaultImage
 import com.sochato.mates.core.ui.components.VerticalSpacer
-import com.sochato.mates.core.ui.components.texts.TextMedium
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
+import com.sochato.mates.home.main.domain.model.MainNews
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun DetailGameCard(
-    item: LibraryItem,
+internal fun DetailNewsCard(
+    item: MainNews,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -43,28 +38,21 @@ internal fun DetailGameCard(
                 .padding(horizontal = 12.dp)
         ) {
             TextSemibold(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f),
                 text = item.title,
                 fontSize = 28.sp,
+                lineHeight = 28.sp,
                 color = wrummyColorPalette.primaryTextColor
             )
 
             TextRegular(
-                text = item.publisher,
+                text = item.author,
                 fontSize = 18.sp,
                 color = wrummyColorPalette.secondaryTextColor
             )
 
-            VerticalSpacer(height = 12.dp)
-
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                item.genres.forEach { genre ->
-                    GenreChip(title = genre)
-                }
-            }
-
-            VerticalSpacer(height = 12.dp)
+            VerticalSpacer(height = 24.dp)
 
             TextSemibold(
                 text = "Описание",
@@ -76,33 +64,10 @@ internal fun DetailGameCard(
             VerticalSpacer(height = 12.dp)
 
             TextRegular(
-                text = item.description,
+                text = item.content,
                 fontSize = 14.sp,
                 color = wrummyColorPalette.secondaryTextColor
             )
-
-            VerticalSpacer(height = 16.dp)
-
-            Column {
-                TextMedium(
-                    text = "Поддерживаемые платформы: ",
-                    fontSize = 14.sp,
-                )
-
-                VerticalSpacer(height = 4.dp)
-
-                FlowRow(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    item.platforms.forEach { platform ->
-                        GenreChip(title = platform)
-                    }
-                }
-            }
-
         }
     }
 

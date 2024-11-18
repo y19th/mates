@@ -7,10 +7,12 @@ import com.sochato.mates.core.domain.use_cases.profile.RequestProfileUseCase
 import com.sochato.mates.core.util.base_components.ScreenComponent
 import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.debugMessage
+import com.sochato.mates.home.game_detail.domain.models.toLibraryConfig
 import com.sochato.mates.home.main.domain.events.MainEvents
 import com.sochato.mates.home.main.domain.model.MainNews
 import com.sochato.mates.home.main.domain.model.toMainNews
 import com.sochato.mates.home.main.domain.state.MainState
+import com.sochato.mates.home.news_detail.domain.models.toNewsConfig
 import com.sochato.mates.home.root.HomeNavigator
 import com.sochato.mates.home.root.ui.HomeComponent
 import com.sochato.mates.profile.profile.domain.model.ProfileConfig
@@ -67,6 +69,27 @@ internal class MainComponent(
 
             MainEvents.OnRefreshOnlyProfileGames -> {
                 refreshProfileLibrary()
+            }
+
+            is MainEvents.OnNavigateToDetailGame -> {
+                navigate {
+                    navigator.handleConfiguration(
+                        HomeComponent.Configuration.DetailGameConfiguration(
+                            item = event.model.toLibraryConfig(),
+                            isAlreadyAdded = true
+                        )
+                    )
+                }
+            }
+
+            is MainEvents.OnNavigateToDetailNews -> {
+                navigate {
+                    navigator.handleConfiguration(
+                        HomeComponent.Configuration.DetailNewsConfiguration(
+                            config = event.model.toNewsConfig()
+                        )
+                    )
+                }
             }
         }
     }

@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sochato.mates.core.ui.components.HorizontalSpacer
-import com.sochato.mates.core.ui.components.MatesImage
+import com.sochato.mates.core.ui.components.MatesAvatarImage
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
@@ -48,7 +48,7 @@ internal fun LazyItemScope.MateItem(
             .animateItem(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MatesImage(
+        MatesAvatarImage(
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape),
