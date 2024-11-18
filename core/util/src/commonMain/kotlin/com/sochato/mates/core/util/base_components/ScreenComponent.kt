@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @Suppress("PropertyName")
-abstract class ScreenComponent<State : BaseState,in Event : BaseEvents>(
+abstract class ScreenComponent<State : BaseState, in Event : BaseEvents>(
     componentContext: ComponentContext,
     initialState: State
 ) : BaseComponent(componentContext) {
@@ -66,4 +66,8 @@ abstract class ScreenComponent<State : BaseState,in Event : BaseEvents>(
 @Composable
 fun <State : BaseState, Events : BaseEvents> ScreenComponent<State, Events>.rememberHandleEvents(): ((Events) -> Unit) {
     return remember { { this.handleEvent(it) } }
+}
+
+fun Throwable.snackState(): SnackState {
+    return SnackState.failure(findWrummyException().message)
 }

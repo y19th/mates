@@ -12,5 +12,7 @@ internal sealed interface MainEvents: BaseEvents {
 
     data object OnRefresh: MainEvents
 
+    data object OnRefreshOnlyProfileGames: MainEvents
+
     data class OnSearchChange(val newValue: String): MainEvents
 }

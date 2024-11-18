@@ -14,4 +14,7 @@ interface GameDao {
 
     @Query("select * from games")
     suspend fun receiveAll(): List<GameEntity>
+
+    @Query("delete from games where game = :gameId")
+    suspend fun deleteGameById(gameId: Int)
 }

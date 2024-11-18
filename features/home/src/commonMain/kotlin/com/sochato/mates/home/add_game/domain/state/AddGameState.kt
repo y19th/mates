@@ -7,5 +7,6 @@ import kotlinx.collections.immutable.persistentListOf
 
 internal data class AddGameState(
     val library: ImmutableList<LibraryItem> = persistentListOf(),
+    val profileLibrary: ImmutableList<LibraryItem> = persistentListOf(),
     val search: String = ""
 ): BaseState

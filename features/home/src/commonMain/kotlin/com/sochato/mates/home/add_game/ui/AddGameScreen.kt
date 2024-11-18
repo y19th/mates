@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +33,10 @@ internal fun AddGameScreen(
 ) {
     val state = component.state.collectAsImmediateState()
     val handleEvents = component.rememberHandleEvents()
+
+    LaunchedEffect(Unit) {
+        handleEvents(AddGameEvents.OnRefreshProfileLibrary)
+    }
 
     WrummyColumn(
         modifier = Modifier
@@ -60,6 +65,34 @@ internal fun AddGameScreen(
                 )
             }
             item { VerticalSpacer(height = 28.dp) }
+
+            item {
+                TextSemibold(
+                    text = "Ваши игры",
+                    fontSize = 20.sp,
+                    color = wrummyColorPalette.primaryTextColor
+                )
+            }
+
+            item { VerticalSpacer(height = 20.dp) }
+
+            items(
+                items = state.value.profileLibrary,
+                key = { it.id.plus(100) }
+            ) { item ->
+                GameItem(
+                    modifier = Modifier
+                        .padding(vertical = 8.dp),
+                    image = item.image,
+                    title = item.title,
+                    onClick = {
+                        handleEvents(AddGameEvents.OnNavigateToDetail(item))
+                    }
+                )
+            }
+
+            item { VerticalSpacer(height = 20.dp) }
+
             item {
                 TextSemibold(
                     text = "Список игр",

@@ -2,7 +2,9 @@ package com.sochato.mates.core.domain.di
 
 import com.sochato.mates.core.domain.models.WrummyDispatchers
 import com.sochato.mates.core.domain.use_cases.LogoutUseCase
+import com.sochato.mates.core.domain.use_cases.library.ReceiveProfileLibraryGamesUseCase
 import com.sochato.mates.core.domain.use_cases.library.RequestAddGameToProfileLibraryUseCase
+import com.sochato.mates.core.domain.use_cases.library.RequestDeleteGameFromProfileLibraryUseCase
 import com.sochato.mates.core.domain.use_cases.library.RequestLibraryUseCase
 import com.sochato.mates.core.domain.use_cases.library.RequestProfileLibraryUseCase
 import com.sochato.mates.core.domain.use_cases.login.RequestLoginUseCase
@@ -32,4 +34,6 @@ val domainModule = module {
     factoryOf(::RequestProfileLibraryUseCase)
     factoryOf(::RequestLibraryUseCase)
     factoryOf(::RequestAddGameToProfileLibraryUseCase)
+    factoryOf(::RequestDeleteGameFromProfileLibraryUseCase)
+    factoryOf(::ReceiveProfileLibraryGamesUseCase)
 }

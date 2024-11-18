@@ -59,14 +59,25 @@ internal fun DetailGameScreen(
                 VerticalSpacer(height = 32.dp)
             }
             item {
-                RoundedButton(
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp),
-                    title = "Добавить игру",
-                    onClick = {
-                        handleEvents(DetailGameEvents.OnAddGameInProfileLibrary)
-                    }
-                )
+
+                if (state.value.isAlreadyAdded)
+                    RoundedButton(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp),
+                        title = "Удалить игру из библиотеки",
+                        onClick = {
+                            handleEvents(DetailGameEvents.OnDeleteGameFromProfileLibrary)
+                        }
+                    )
+                else
+                    RoundedButton(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp),
+                        title = "Добавить игру",
+                        onClick = {
+                            handleEvents(DetailGameEvents.OnAddGameInProfileLibrary)
+                        }
+                    )
             }
         }
     }

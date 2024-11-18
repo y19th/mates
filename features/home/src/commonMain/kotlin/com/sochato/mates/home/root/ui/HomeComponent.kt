@@ -52,7 +52,7 @@ class HomeComponent(
             Child.DetailGameChild(
                 getComponent(
                     context = componentContext,
-                    param = configuration.item
+                    params = arrayOf(configuration.item, configuration.isAlreadyAdded)
                 )
             )
         }
@@ -81,7 +81,8 @@ class HomeComponent(
 
         @Serializable
         internal data class DetailGameConfiguration(
-            val item: LibraryConfig
+            val item: LibraryConfig,
+            val isAlreadyAdded: Boolean
         ): Configuration()
 
         @Serializable

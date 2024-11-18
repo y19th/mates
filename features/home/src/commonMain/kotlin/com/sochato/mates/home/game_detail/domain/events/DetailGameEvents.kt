@@ -7,4 +7,6 @@ internal sealed interface DetailGameEvents: BaseEvents {
     data object OnNavigateBack: DetailGameEvents
 
     data object OnAddGameInProfileLibrary: DetailGameEvents
+
+    data object OnDeleteGameFromProfileLibrary: DetailGameEvents
 }

@@ -22,6 +22,8 @@ internal fun MainScreen(
     LaunchedEffect(Unit) {
         if (isFirst)
             handleEvents(MainEvents.OnFirstLaunch)
+        if (state.value.isLoading.not())
+            handleEvents(MainEvents.OnRefreshOnlyProfileGames)
     }
 
     when {

@@ -64,12 +64,17 @@ internal class MainComponent(
                     )
                 }
             }
+
+            MainEvents.OnRefreshOnlyProfileGames -> {
+                refreshProfileLibrary()
+            }
         }
     }
 
     private fun refresh() {
         update { it.copy(isLoading = true) }
         launchIO {
+            refreshProfileLibrary()
             launchIO {
                 withTimeout(6.seconds) {
                     requestProfile()
@@ -80,14 +85,6 @@ internal class MainComponent(
                             debugMessage(throwable.stackTraceToString())
                         }
                 }
-            }
-            launchIO {
-                requestProfileLibrary()
-                    .onSuccess { library ->
-                        update { it.copy(library = library) }
-                    }.onFailure {
-                        update { it.copy(isError = true) }
-                    }
             }
             launchIO {
                 requestNews()
@@ -113,6 +110,17 @@ internal class MainComponent(
             }
         }.invokeOnCompletion {
             update { it.copy(isLoading = false) }
+        }
+    }
+
+    private fun refreshProfileLibrary() {
+        launchIO {
+            requestProfileLibrary()
+                .onSuccess { library ->
+                    update { it.copy(library = library) }
+                }.onFailure {
+                    update { it.copy(isError = true) }
+                }
         }
     }
 }

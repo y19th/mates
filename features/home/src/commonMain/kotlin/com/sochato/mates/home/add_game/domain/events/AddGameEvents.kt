@@ -7,6 +7,8 @@ internal sealed interface AddGameEvents: BaseEvents {
 
     data object OnNavigateBack: AddGameEvents
 
+    data object OnRefreshProfileLibrary: AddGameEvents
+
     data class OnNavigateToDetail(val item: LibraryItem): AddGameEvents
 
     data class OnSearchChanged(val newValue: String): AddGameEvents
