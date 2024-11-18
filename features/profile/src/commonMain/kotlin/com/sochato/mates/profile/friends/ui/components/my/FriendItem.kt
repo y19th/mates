@@ -1,5 +1,6 @@
 package com.sochato.mates.profile.friends.ui.components.my
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +15,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sochato.mates.core.domain.models.Friend
 import com.sochato.mates.core.ui.components.HorizontalSpacer
 import com.sochato.mates.core.ui.components.MatesImage
 import com.sochato.mates.core.ui.components.VerticalSpacer
@@ -22,10 +22,12 @@ import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 import com.sochato.mates.core.util.extension.shaped
+import com.sochato.mates.profile.friends.domain.models.InternalMate
 
 @Composable
 internal fun FriendItem(
-    friend: Friend
+    friend: InternalMate,
+    onClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -34,6 +36,7 @@ internal fun FriendItem(
                 borderColor = MaterialTheme.colorScheme.outlineVariant,
                 borderWidth = 0.5.dp
             )
+            .clickable(onClick = onClick)
             .padding(vertical = 10.dp, horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

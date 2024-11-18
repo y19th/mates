@@ -1,6 +1,6 @@
 package com.sochato.mates.core.domain.models
 
-data class Friend(
+data class Mate(
     val uid: String,
     val email: String,
     val nickname: String,

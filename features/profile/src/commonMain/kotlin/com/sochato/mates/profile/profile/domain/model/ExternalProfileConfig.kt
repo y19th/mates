@@ -1,6 +1,6 @@
 package com.sochato.mates.profile.profile.domain.model
 
-import com.sochato.mates.profile.friends.domain.models.Mate
+import com.sochato.mates.profile.friends.domain.models.InternalMate
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,7 +22,7 @@ data class ExternalProfile(
     val isFriend: Boolean
 )
 
-internal fun Mate.toExternalConfig() = ExternalProfileConfig(
+internal fun InternalMate.toExternalConfig() = ExternalProfileConfig(
     uid = uid,
     email = email,
     nickname = nickname,

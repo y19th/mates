@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FriendResponse(
+data class MateResponse(
     val uid: String,
     val email: String,
     val nickname: String,

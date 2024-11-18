@@ -5,10 +5,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sochato.mates.core.domain.models.Friend
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
+import com.sochato.mates.profile.friends.domain.models.InternalMate
 import kotlinx.collections.immutable.ImmutableList
 import mates.features.profile.generated.resources.Res
 import mates.features.profile.generated.resources.friends_my_header
@@ -16,7 +16,8 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MyMatesSection(
-    friends: ImmutableList<Friend>
+    friends: ImmutableList<InternalMate>,
+    onMateClick: (InternalMate) -> Unit
 ) {
     LazyColumn {
         item {
@@ -30,8 +31,16 @@ internal fun MyMatesSection(
             VerticalSpacer(height = 32.dp)
         }
         if (friends.isNotEmpty())
-            items(friends) { friend ->
-                FriendItem(friend)
+            items(
+                items = friends,
+                key = { it.uid }
+            ) { friend ->
+                FriendItem(
+                    friend = friend,
+                    onClick = {
+                        onMateClick(friend)
+                    }
+                )
 
                 VerticalSpacer(height = 16.dp)
             }

@@ -57,13 +57,19 @@ internal fun FriendsScreen(
 
         if (state.search.isEmpty())
             MyMatesSection(
-                friends = state.friendsList
+                friends = state.friendsList,
+                onMateClick = { mate ->
+                    handleEvents(FriendsEvents.OnNavigateToMateProfile(mate))
+                }
             )
         else
             AllMatesSection(
                 users = state.filteredUsers,
                 onMateClick = { mate ->
                     handleEvents(FriendsEvents.OnNavigateToMateProfile(mate))
+                },
+                onFriendshipRequest = { mate ->
+                    handleEvents(FriendsEvents.OnRequestFriendship(mate))
                 }
             )
     }

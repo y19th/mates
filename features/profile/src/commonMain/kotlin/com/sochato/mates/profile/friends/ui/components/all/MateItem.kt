@@ -26,13 +26,15 @@ import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
+import com.sochato.mates.core.util.extension.noIndicationClickable
 import com.sochato.mates.core.util.extension.shaped
-import com.sochato.mates.profile.friends.domain.models.Mate
+import com.sochato.mates.profile.friends.domain.models.InternalMate
 
 @Composable
 internal fun LazyItemScope.MateItem(
-    mate: Mate,
-    onMateClick: () -> Unit
+    internalMate: InternalMate,
+    onMateClick: () -> Unit,
+    onFriendshipRequest: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -50,7 +52,7 @@ internal fun LazyItemScope.MateItem(
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape),
-            url = mate.profilePicture
+            url = internalMate.profilePicture
         )
 
         HorizontalSpacer(width = 8.dp)
@@ -60,7 +62,7 @@ internal fun LazyItemScope.MateItem(
                 .fillMaxWidth(0.8f)
         ) {
             TextSemibold(
-                text = mate.nickname,
+                text = internalMate.nickname,
                 fontSize = 16.sp,
                 color = wrummyColorPalette.primaryTextColor
             )
@@ -79,8 +81,10 @@ internal fun LazyItemScope.MateItem(
                 .weight(1f)
         )
 
-        if (!mate.isFriend)
+        if (!internalMate.isFriend && !internalMate.isRequested)
             Icon(
+                modifier = Modifier
+                    .noIndicationClickable(onClick = onFriendshipRequest),
                 imageVector = Icons.Default.Add,
                 contentDescription = null
             )

@@ -6,6 +6,7 @@ import com.sochato.mates.core.domain.use_cases.EraseBearerTokenUseCase
 import com.sochato.mates.core.domain.use_cases.LogoutUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestAllUsersUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestFriendsUseCase
+import com.sochato.mates.core.domain.use_cases.friends.RequestFriendshipUseCase
 import com.sochato.mates.core.domain.use_cases.library.ReceiveProfileLibraryGamesUseCase
 import com.sochato.mates.core.domain.use_cases.library.RequestAddGameToProfileLibraryUseCase
 import com.sochato.mates.core.domain.use_cases.library.RequestDeleteGameFromProfileLibraryUseCase
@@ -42,6 +43,7 @@ val domainModule = module {
     factoryOf(::ReceiveProfileLibraryGamesUseCase)
     factoryOf(::RequestFriendsUseCase)
     factoryOf(::RequestAllUsersUseCase)
+    factoryOf(::RequestFriendshipUseCase)
     factory {
         EraseBearerTokenUseCase(
             dispatchers = get(),

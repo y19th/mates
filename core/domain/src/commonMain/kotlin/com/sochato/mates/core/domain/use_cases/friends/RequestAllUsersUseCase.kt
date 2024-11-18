@@ -2,7 +2,7 @@ package com.sochato.mates.core.domain.use_cases.friends
 
 import com.sochato.mates.core.data.repository.FriendsRepository
 import com.sochato.mates.core.domain.BaseUseCase
-import com.sochato.mates.core.domain.mapper.toImmutableFriendsList
+import com.sochato.mates.core.domain.mapper.toImmutableMateList
 import com.sochato.mates.core.domain.models.WrummyDispatchers
 import kotlinx.coroutines.withContext
 
@@ -13,6 +13,6 @@ class RequestAllUsersUseCase(
 
     suspend operator fun invoke() = withContext(context) {
         repository.requestAllUsers()
-            .mapCatching { it.toImmutableFriendsList() }
+            .mapCatching { it.toImmutableMateList() }
     }
 }

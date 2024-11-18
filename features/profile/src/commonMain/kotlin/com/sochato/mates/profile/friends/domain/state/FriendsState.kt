@@ -1,18 +1,20 @@
 package com.sochato.mates.profile.friends.domain.state
 
-import com.sochato.mates.core.domain.models.Friend
+import com.sochato.mates.core.domain.models.Mate
 import com.sochato.mates.core.domain.models.ProfileModel
 import com.sochato.mates.core.util.base_components.BaseState
-import com.sochato.mates.profile.friends.domain.models.Mate
+import com.sochato.mates.profile.friends.domain.models.InternalMate
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 internal data class FriendsState(
-    val friendsList: ImmutableList<Friend> = persistentListOf(),
     val profileModel: ProfileModel = ProfileModel(),
+    val friendsList: ImmutableList<InternalMate> = persistentListOf(),
 
-    val allUsers: ImmutableList<Friend> = persistentListOf(),
-    val filteredUsers: List<Mate> = persistentListOf(),
+    val allUsers: ImmutableList<Mate> = persistentListOf(),
+    val filteredUsers: List<InternalMate> = persistentListOf(),
+
+    val requestedMates: List<String> = persistentListOf(),
 
     val search: String = ""
 ) : BaseState

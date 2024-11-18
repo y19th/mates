@@ -8,15 +8,16 @@ import androidx.compose.ui.unit.sp
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
-import com.sochato.mates.profile.friends.domain.models.Mate
+import com.sochato.mates.profile.friends.domain.models.InternalMate
 import mates.features.profile.generated.resources.Res
 import mates.features.profile.generated.resources.friends_all_header
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun AllMatesSection(
-    users: List<Mate>,
-    onMateClick: (Mate) -> Unit
+    users: List<InternalMate>,
+    onMateClick: (InternalMate) -> Unit,
+    onFriendshipRequest: (InternalMate) -> Unit
 ) {
     LazyColumn {
         item {
@@ -35,8 +36,9 @@ internal fun AllMatesSection(
                 key = { it.uid }
             ) { user ->
                 MateItem(
-                    mate = user,
-                    onMateClick = { onMateClick(user) }
+                    internalMate = user,
+                    onMateClick = { onMateClick(user) },
+                    onFriendshipRequest = { onFriendshipRequest(user) }
                 )
 
                 VerticalSpacer(height = 16.dp)
