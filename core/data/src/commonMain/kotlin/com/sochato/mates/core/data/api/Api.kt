@@ -20,4 +20,5 @@ object MatesApi {
     const val NewsRequest = "news/"
 
     const val Friends = "friends/"
+    const val Users = "users/"
 }

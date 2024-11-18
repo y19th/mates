@@ -46,6 +46,16 @@ internal class ProfileComponent(
             ProfileEvents.OnRefresh -> {
                 updateUser()
             }
+
+            ProfileEvents.OnNavigateToMates -> {
+                navigate {
+                    navigator.handleConfiguration(
+                        RootProfileComponent.Configuration.MatesConfiguration(
+                            config = ProfileConfig(state.value.model)
+                        )
+                    )
+                }
+            }
         }
     }
 

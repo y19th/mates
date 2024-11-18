@@ -97,7 +97,9 @@ internal fun ProfileScreen(
         ProfileButton(
             image = Res.drawable.ic_friends,
             title = stringResource(Res.string.profile_mates_header),
-            onClick = {}
+            onClick = {
+                handleEvents(ProfileEvents.OnNavigateToMates)
+            }
         )
 
         VerticalSpacer(height = 16.dp)

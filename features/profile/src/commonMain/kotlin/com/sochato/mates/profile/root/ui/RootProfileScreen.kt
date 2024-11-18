@@ -6,6 +6,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.sochato.mates.profile.edit_profile.ui.EditProfileScreen
+import com.sochato.mates.profile.friends.ui.FriendsScreen
 import com.sochato.mates.profile.profile.ui.ProfileScreen
 
 @Composable
@@ -25,6 +26,10 @@ fun RootProfileScreen(
 
             is RootProfileComponent.Child.EditProfileConfiguration -> {
                 EditProfileScreen(component = instance.component)
+            }
+
+            is RootProfileComponent.Child.MatesConfiguration -> {
+                FriendsScreen(component = instance.component)
             }
         }
     }

@@ -9,6 +9,8 @@ import io.ktor.client.request.get
 interface FriendsRepository {
 
     suspend fun requestFriends(): Result<List<FriendResponse>>
+
+    suspend fun requestAllUsers(): Result<List<FriendResponse>>
 }
 
 internal class FriendsRepositoryImpl(
@@ -17,5 +19,9 @@ internal class FriendsRepositoryImpl(
 
     override suspend fun requestFriends(): Result<List<FriendResponse>> = runCatching {
         client.get(urlString = MatesApi.Friends).fetchResponse()
+    }
+
+    override suspend fun requestAllUsers(): Result<List<FriendResponse>> = runCatching {
+        client.get(urlString = MatesApi.Users).fetchResponse()
     }
 }

@@ -10,5 +10,7 @@ internal sealed interface ProfileEvents: BaseEvents {
 
     data object OnNavigateToEdit: ProfileEvents
 
+    data object OnNavigateToMates: ProfileEvents
+
     data object OnLogout: ProfileEvents
 }

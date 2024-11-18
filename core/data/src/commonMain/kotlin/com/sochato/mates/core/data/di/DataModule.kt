@@ -7,6 +7,8 @@ import com.sochato.mates.core.data.api.defaultQualifier
 import com.sochato.mates.core.data.extension.authorizedClient
 import com.sochato.mates.core.data.extension.defaultClient
 import com.sochato.mates.core.data.extension.qualifiedSingle
+import com.sochato.mates.core.data.repository.FriendsRepository
+import com.sochato.mates.core.data.repository.FriendsRepositoryImpl
 import com.sochato.mates.core.data.repository.LibraryRepository
 import com.sochato.mates.core.data.repository.LibraryRepositoryImpl
 import com.sochato.mates.core.data.repository.LoginRepository
@@ -29,4 +31,5 @@ val dataModule = module {
     factory { ProfileRepositoryImpl(authorizedClient()) }.bind<ProfileRepository>()
     factory { NewsRepositoryImpl(authorizedClient()) }.bind<NewsRepository>()
     factory { LibraryRepositoryImpl(authorizedClient()) }.bind<LibraryRepository>()
+    factory { FriendsRepositoryImpl(authorizedClient()) }.bind<FriendsRepository>()
 }

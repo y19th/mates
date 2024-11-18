@@ -1,5 +1,6 @@
 package com.sochato.mates.profile.profile.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,9 +31,8 @@ fun ProfileButton(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .shaped(
-                borderColor = MaterialTheme.colorScheme.outlineVariant
-            )
+            .shaped(borderColor = MaterialTheme.colorScheme.outlineVariant)
+            .clickable(onClick = onClick)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -52,8 +52,10 @@ fun ProfileButton(
             color = wrummyColorPalette.homePrimaryColor
         )
 
-        Spacer(modifier = Modifier
-            .weight(0.5f))
+        Spacer(
+            modifier = Modifier
+                .weight(0.5f)
+        )
 
         Icon(
             imageVector = vectorResource(Res.drawable.ic_next),
