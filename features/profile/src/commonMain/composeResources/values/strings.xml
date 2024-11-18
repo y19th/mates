@@ -14,4 +14,14 @@
 
     <string name="edit_profile_desc_placeholder">Статус</string>
     <!-- -->
+
+    <!--FRIENDS SCREEN-->
+    <string name="friends_title">Mates</string>
+    <string name="friends_search_placeholder">Найти друзей...</string>
+
+    <string name="friends_all_header">Все mates</string>
+    <string name="friends_all_empty">Никого не найдено"</string>
+    <string name="friends_my_header">Ваши mates</string>
+    <string name="friends_my_empty">У вас еще нет mates</string>
+    <!-- -->
 </resources>

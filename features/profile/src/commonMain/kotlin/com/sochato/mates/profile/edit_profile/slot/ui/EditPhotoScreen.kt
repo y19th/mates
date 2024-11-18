@@ -19,11 +19,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.sochato.mates.core.ui.components.ModalSheetButton
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
 import com.sochato.mates.profile.edit_profile.slot.domain.effect.EditPhotoEffect
 import com.sochato.mates.profile.edit_profile.slot.domain.events.EditPhotoEvents
-import com.sochato.mates.profile.edit_profile.slot.ui.components.EditPhotoButton
 import com.sochato.mates.profile.shared.PickPhoto
 import com.sochato.mates.profile.shared.TakePhoto
 
@@ -67,39 +67,39 @@ internal fun EditPhotoScreen(
         }
 
 
-        ModalBottomSheet(
-            sheetState = state,
-            containerColor = Color.White,
-            onDismissRequest = {
-                handleEvents(EditPhotoEvents.OnDismiss)
-            },
-            contentWindowInsets = { WindowInsets.systemBars.only(WindowInsetsSides.Bottom) }
+    ModalBottomSheet(
+        sheetState = state,
+        containerColor = Color.White,
+        onDismissRequest = {
+            handleEvents(EditPhotoEvents.OnDismiss)
+        },
+        contentWindowInsets = { WindowInsets.systemBars.only(WindowInsetsSides.Bottom) }
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 24.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .padding(horizontal = 24.dp)
-            ) {
-                VerticalSpacer(height = 16.dp)
+            VerticalSpacer(height = 16.dp)
 
-                EditPhotoButton(
-                    title = "Выбрать из галереи",
-                    icon = Icons.Default.Image,
-                    onClick = {
-                        handleEvents(EditPhotoEvents.OnTakePhotoFromGallery)
-                    }
-                )
+            ModalSheetButton(
+                title = "Выбрать из галереи",
+                icon = Icons.Default.Image,
+                onClick = {
+                    handleEvents(EditPhotoEvents.OnTakePhotoFromGallery)
+                }
+            )
 
-                VerticalSpacer(height = 16.dp)
+            VerticalSpacer(height = 16.dp)
 
-                EditPhotoButton(
-                    title = "Сделать фото",
-                    icon = Icons.Default.PhotoCamera,
-                    onClick = {
-                        handleEvents(EditPhotoEvents.OnShootPhoto)
-                    }
-                )
+            ModalSheetButton(
+                title = "Сделать фото",
+                icon = Icons.Default.PhotoCamera,
+                onClick = {
+                    handleEvents(EditPhotoEvents.OnShootPhoto)
+                }
+            )
 
-                VerticalSpacer(height = 24.dp)
-            }
+            VerticalSpacer(height = 24.dp)
         }
+    }
 }

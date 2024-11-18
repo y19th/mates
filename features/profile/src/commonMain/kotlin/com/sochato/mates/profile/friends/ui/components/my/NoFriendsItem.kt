@@ -10,6 +10,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sochato.mates.core.ui.components.texts.TextMedium
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
+import mates.features.profile.generated.resources.Res
+import mates.features.profile.generated.resources.friends_my_empty
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun NoFriendsItem() {
@@ -20,7 +23,7 @@ internal fun NoFriendsItem() {
         contentAlignment = Alignment.Center
     ) {
         TextMedium(
-            text = "У вас еще нет mates",
+            text = stringResource(Res.string.friends_my_empty),
             fontSize = 16.sp,
             color = wrummyColorPalette.secondaryTextColor
         )

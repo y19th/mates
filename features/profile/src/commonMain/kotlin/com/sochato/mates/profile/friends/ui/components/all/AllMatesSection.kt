@@ -9,15 +9,19 @@ import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 import com.sochato.mates.profile.friends.domain.models.Mate
+import mates.features.profile.generated.resources.Res
+import mates.features.profile.generated.resources.friends_all_header
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun AllMatesSection(
-    users: List<Mate>
+    users: List<Mate>,
+    onMateClick: (Mate) -> Unit
 ) {
     LazyColumn {
         item {
             TextSemibold(
-                text = "Все mates",
+                text = stringResource(Res.string.friends_all_header),
                 fontSize = 20.sp,
                 color = wrummyColorPalette.primaryTextColor
             )
@@ -30,7 +34,10 @@ internal fun AllMatesSection(
                 items = users,
                 key = { it.uid }
             ) { user ->
-                MateItem(user)
+                MateItem(
+                    mate = user,
+                    onMateClick = { onMateClick(user) }
+                )
 
                 VerticalSpacer(height = 16.dp)
             }

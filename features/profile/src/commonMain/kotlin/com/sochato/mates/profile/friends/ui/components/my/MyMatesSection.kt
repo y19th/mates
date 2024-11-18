@@ -10,6 +10,9 @@ import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.texts.TextSemibold
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 import kotlinx.collections.immutable.ImmutableList
+import mates.features.profile.generated.resources.Res
+import mates.features.profile.generated.resources.friends_my_header
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MyMatesSection(
@@ -18,7 +21,7 @@ internal fun MyMatesSection(
     LazyColumn {
         item {
             TextSemibold(
-                text = "Ваши mates",
+                text = stringResource(Res.string.friends_my_header),
                 fontSize = 20.sp,
                 color = wrummyColorPalette.primaryTextColor
             )

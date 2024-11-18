@@ -18,6 +18,10 @@ import com.sochato.mates.core.util.extension.collectAsImmediateState
 import com.sochato.mates.profile.friends.domain.events.FriendsEvents
 import com.sochato.mates.profile.friends.ui.components.all.AllMatesSection
 import com.sochato.mates.profile.friends.ui.components.my.MyMatesSection
+import mates.features.profile.generated.resources.Res
+import mates.features.profile.generated.resources.friends_search_placeholder
+import mates.features.profile.generated.resources.friends_title
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +37,7 @@ internal fun FriendsScreen(
             .padding(horizontal = 12.dp),
         topBar = {
             NavigationTopBar(
-                title = "Mates",
+                title = stringResource(Res.string.friends_title),
                 navigationIcon = {
                     BackNavigationIcon { handleEvents(FriendsEvents.OnNavigateBack) }
                 }
@@ -44,7 +48,7 @@ internal fun FriendsScreen(
             modifier = Modifier
                 .fillMaxWidth(),
             value = state.search,
-            placeholder = "poikst",
+            placeholder = stringResource(Res.string.friends_search_placeholder),
             onValueChange = {
                 handleEvents(FriendsEvents.OnSearchChanged(it))
             }
@@ -57,7 +61,10 @@ internal fun FriendsScreen(
             )
         else
             AllMatesSection(
-                users = state.filteredUsers
+                users = state.filteredUsers,
+                onMateClick = { mate ->
+                    handleEvents(FriendsEvents.OnNavigateToMateProfile(mate))
+                }
             )
     }
 }

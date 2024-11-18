@@ -10,6 +10,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sochato.mates.core.ui.components.texts.TextMedium
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
+import mates.features.profile.generated.resources.Res
+import mates.features.profile.generated.resources.friends_all_empty
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun NoMatesFound() {
@@ -20,7 +23,7 @@ internal fun NoMatesFound() {
         contentAlignment = Alignment.Center
     ) {
         TextMedium(
-            text = "Никого не найдено",
+            text = stringResource(Res.string.friends_all_empty),
             fontSize = 16.sp,
             color = wrummyColorPalette.secondaryTextColor
         )

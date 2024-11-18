@@ -6,6 +6,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.sochato.mates.profile.edit_profile.ui.EditProfileScreen
+import com.sochato.mates.profile.external_profile.ui.ExternalProfileScreen
 import com.sochato.mates.profile.friends.ui.FriendsScreen
 import com.sochato.mates.profile.profile.ui.ProfileScreen
 
@@ -24,12 +25,16 @@ fun RootProfileScreen(
                 ProfileScreen(component = instance.component)
             }
 
-            is RootProfileComponent.Child.EditProfileConfiguration -> {
+            is RootProfileComponent.Child.EditProfileChild -> {
                 EditProfileScreen(component = instance.component)
             }
 
-            is RootProfileComponent.Child.MatesConfiguration -> {
+            is RootProfileComponent.Child.MatesChild -> {
                 FriendsScreen(component = instance.component)
+            }
+
+            is RootProfileComponent.Child.ExternalProfileChild -> {
+                ExternalProfileScreen(component = instance.component)
             }
         }
     }

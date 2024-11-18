@@ -8,8 +8,10 @@ import com.sochato.mates.profile.friends.domain.events.FriendsEvents
 import com.sochato.mates.profile.friends.domain.models.mapToMate
 import com.sochato.mates.profile.friends.domain.state.FriendsState
 import com.sochato.mates.profile.profile.domain.model.ProfileConfig
+import com.sochato.mates.profile.profile.domain.model.toExternalConfig
 import com.sochato.mates.profile.profile.domain.model.toProfileModel
 import com.sochato.mates.profile.root.RootProfileNavigator
+import com.sochato.mates.profile.root.ui.RootProfileComponent
 
 internal class FriendsComponent(
     componentContext: ComponentContext,
@@ -54,9 +56,17 @@ internal class FriendsComponent(
                         )
                     }
                 }
-
-
                 update { it.copy(search = event.newValue) }
+            }
+
+            is FriendsEvents.OnNavigateToMateProfile -> {
+                navigate {
+                    navigator.handleConfiguration(
+                        RootProfileComponent.Configuration.ExternalProfileConfiguration(
+                            config = event.mate.toExternalConfig()
+                        )
+                    )
+                }
             }
         }
     }

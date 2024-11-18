@@ -5,7 +5,9 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.sochato.mates.core.util.base_components.BaseComponent
 import com.sochato.mates.core.util.extension.getComponent
 import com.sochato.mates.profile.edit_profile.ui.EditProfileComponent
+import com.sochato.mates.profile.external_profile.ui.ExternalProfileComponent
 import com.sochato.mates.profile.friends.ui.FriendsComponent
+import com.sochato.mates.profile.profile.domain.model.ExternalProfileConfig
 import com.sochato.mates.profile.profile.domain.model.ProfileConfig
 import com.sochato.mates.profile.profile.ui.ProfileComponent
 import com.sochato.mates.profile.root.RootProfileNavigator
@@ -33,7 +35,7 @@ class RootProfileComponent(
         }
 
         is Configuration.EditProfileConfiguration -> {
-            Child.EditProfileConfiguration(
+            Child.EditProfileChild(
                 component = getComponent(
                     context = componentContext,
                     param = configuration.config
@@ -42,7 +44,16 @@ class RootProfileComponent(
         }
 
         is Configuration.MatesConfiguration -> {
-            Child.MatesConfiguration(
+            Child.MatesChild(
+                component = getComponent(
+                    context = componentContext,
+                    param = configuration.config
+                )
+            )
+        }
+
+        is Configuration.ExternalProfileConfiguration -> {
+            Child.ExternalProfileChild(
                 component = getComponent(
                     context = componentContext,
                     param = configuration.config
@@ -55,9 +66,11 @@ class RootProfileComponent(
 
         internal data class ProfileChild(val component: ProfileComponent) : Child()
 
-        internal data class EditProfileConfiguration(val component: EditProfileComponent) : Child()
+        internal data class EditProfileChild(val component: EditProfileComponent) : Child()
 
-        internal data class MatesConfiguration(val component: FriendsComponent) : Child()
+        internal data class MatesChild(val component: FriendsComponent) : Child()
+
+        internal data class ExternalProfileChild(val component: ExternalProfileComponent) : Child()
 
     }
 
@@ -70,6 +83,11 @@ class RootProfileComponent(
         @Serializable
         data class MatesConfiguration(
             val config: ProfileConfig
+        ) : Configuration()
+
+        @Serializable
+        data class ExternalProfileConfiguration(
+            val config: ExternalProfileConfig
         ) : Configuration()
 
         @Serializable

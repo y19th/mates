@@ -1,4 +1,4 @@
-package com.sochato.mates.profile.edit_profile.slot.ui.components
+package com.sochato.mates.core.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,9 +18,10 @@ import androidx.compose.ui.unit.sp
 import com.sochato.mates.core.ui.components.texts.TextRegular
 
 @Composable
-internal fun EditPhotoButton(
+fun ModalSheetButton(
     title: String,
     icon: ImageVector,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Row(
@@ -31,7 +32,8 @@ internal fun EditPhotoButton(
                 shape = RoundedCornerShape(8.dp)
             )
             .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .then(modifier),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -48,4 +50,5 @@ internal fun EditPhotoButton(
             tint = Color(0xFF656565)
         )
     }
+
 }

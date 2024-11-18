@@ -1,5 +1,6 @@
 package com.sochato.mates.profile.friends.ui.components.all
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,7 +31,8 @@ import com.sochato.mates.profile.friends.domain.models.Mate
 
 @Composable
 internal fun LazyItemScope.MateItem(
-    mate: Mate
+    mate: Mate,
+    onMateClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -39,6 +41,7 @@ internal fun LazyItemScope.MateItem(
                 borderColor = MaterialTheme.colorScheme.outlineVariant,
                 borderWidth = 0.5.dp
             )
+            .clickable(onClick = onMateClick)
             .padding(vertical = 10.dp, horizontal = 12.dp)
             .animateItem(),
         verticalAlignment = Alignment.CenterVertically
