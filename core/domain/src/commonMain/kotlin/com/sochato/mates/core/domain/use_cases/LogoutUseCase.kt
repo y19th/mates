@@ -13,11 +13,13 @@ class LogoutUseCase(
     dispatchers: WrummyDispatchers,
     private val tokenRepository: TokenRepository,
     private val transitionRepository: TransitionRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val eraseBearerToken: EraseBearerTokenUseCase
 ) : BaseUseCase(dispatchers) {
     suspend operator fun invoke() = withContext(context) {
         tokenRepository.delete()
         transitionRepository.update(TransitionEntity(step = Transition.None))
         userRepository.deleteUser()
+        eraseBearerToken()
     }
 }

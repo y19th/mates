@@ -18,6 +18,6 @@ internal inline fun <reified T> Module.qualifiedSingle(
     )
 }
 
-internal fun Scope.authorizedClient() = get<HttpClient>(qualifier = named(authorizedQualifier))
+fun Scope.authorizedClient() = get<HttpClient>(qualifier = named(authorizedQualifier))
 
-internal fun Scope.defaultClient() = get<HttpClient>(qualifier = named(defaultQualifier))
+fun Scope.defaultClient() = get<HttpClient>(qualifier = named(defaultQualifier))
