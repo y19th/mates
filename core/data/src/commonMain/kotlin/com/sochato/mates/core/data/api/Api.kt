@@ -18,4 +18,6 @@ object MatesApi {
     const val RefreshToken = "token/refresh/"
 
     const val NewsRequest = "news/"
+
+    const val Friends = "friends/"
 }

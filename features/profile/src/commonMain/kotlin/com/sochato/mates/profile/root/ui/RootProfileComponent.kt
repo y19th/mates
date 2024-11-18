@@ -56,6 +56,9 @@ class RootProfileComponent(
         data object ProfileConfiguration : Configuration()
 
         @Serializable
+        data object MatesConfiguration: Configuration()
+
+        @Serializable
         data class EditProfileConfiguration(
             val config: ProfileConfig
         ) : Configuration()
