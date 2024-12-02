@@ -9,21 +9,25 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import com.sochato.mates.core.domain.models.FriendshipStatus
 import com.sochato.mates.core.ui.components.VerticalSpacer
 import com.sochato.mates.core.ui.components.WrummyColumn
 import com.sochato.mates.core.ui.components.bars.BackNavigationIcon
 import com.sochato.mates.core.ui.components.bars.NavigationTopBar
 import com.sochato.mates.core.ui.components.texts.TextBold
+import com.sochato.mates.core.ui.components.texts.TextRegular
 import com.sochato.mates.core.ui.theme.wrummyColorPalette
 import com.sochato.mates.core.util.base_components.rememberHandleEvents
 import com.sochato.mates.core.util.extension.collectAsImmediateState
 import com.sochato.mates.core.util.extension.noIndicationClickable
 import com.sochato.mates.profile.external_profile.domain.events.ExternalProfileEvents
 import com.sochato.mates.profile.external_profile.slot.ui.ExternalProfileAbilityScreen
+import com.sochato.mates.profile.profile.domain.model.ExternalProfile
 import com.sochato.mates.profile.profile.ui.components.ProfileAsyncIcon
 import com.sochato.mates.profile.profile.ui.components.ProfileButton
 import mates.features.profile.generated.resources.Res
@@ -44,6 +48,9 @@ internal fun ExternalProfileScreen(
     val state by component.state.collectAsImmediateState()
     val handleEvents = component.rememberHandleEvents()
     val dialog = component.dialog.subscribeAsState()
+    val statusString = remember(state.profileInfo) {
+        state.profileInfo.stringByStatus()
+    }
 
     dialog.value.child?.let {
         ExternalProfileAbilityScreen(component = it.instance)
@@ -87,15 +94,18 @@ internal fun ExternalProfileScreen(
             lineHeight = 36.sp,
             color = wrummyColorPalette.homePrimaryColor
         )
-        /*
-                VerticalSpacer(height = 2.dp)
 
-                TextRegular(
-                    text = state.value.model.profileDescription,
-                    fontSize = 16.sp,
-                    lineHeight = 24.sp,
-                    color = wrummyColorPalette.profileSecondaryColor
-                )*/
+        if (statusString.isNotEmpty()) {
+            VerticalSpacer(height = 2.dp)
+
+            TextRegular(
+                text = statusString,
+                fontSize = 16.sp,
+                lineHeight = 24.sp,
+                color = wrummyColorPalette.profileSecondaryColor
+            )
+        }
+
 
         VerticalSpacer(height = 32.dp)
 
@@ -122,5 +132,28 @@ internal fun ExternalProfileScreen(
             title = stringResource(Res.string.profile_mates_points),
             onClick = {}
         )
+    }
+}
+
+private fun ExternalProfile.stringByStatus(): String {
+    return when (friendshipStatus) {
+        FriendshipStatus.Accepted -> {
+            "ваш друг"
+        }
+
+        FriendshipStatus.Blocked -> {
+            "отклонил запрос"
+        }
+
+        FriendshipStatus.Pending -> {
+            if (isRequested)
+                "запрос на дружбу отправлен"
+            else
+                "вы отправили запрос на дружбу"
+        }
+
+        else -> {
+            ""
+        }
     }
 }

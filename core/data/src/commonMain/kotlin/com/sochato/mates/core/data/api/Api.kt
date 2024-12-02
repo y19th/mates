@@ -22,4 +22,5 @@ object MatesApi {
     const val Friends = "friends/"
     const val Users = "users/"
     const val RequestFriendship = "send-request/"
+    const val AcceptFriendship = "accept-request/"
 }

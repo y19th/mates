@@ -1,6 +1,8 @@
 package com.sochato.mates.profile.friends.ui
 
 import com.arkivanov.decompose.ComponentContext
+import com.sochato.mates.core.domain.models.isContainsRequestedMate
+import com.sochato.mates.core.domain.use_cases.friends.AcceptFriendshipUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestAllUsersUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestFriendsUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestFriendshipUseCase
@@ -23,7 +25,8 @@ internal class FriendsComponent(
     private val navigator: RootProfileNavigator,
     private val requestAllUsers: RequestAllUsersUseCase,
     private val requestFriendship: RequestFriendshipUseCase,
-    private val requestFriends: RequestFriendsUseCase
+    private val requestFriends: RequestFriendsUseCase,
+    private val acceptFriendship: AcceptFriendshipUseCase
 ) : ScreenComponent<FriendsState, FriendsEvents>(
     componentContext = componentContext,
     initialState = FriendsState(profileModel = config.toProfileModel())
@@ -38,8 +41,20 @@ internal class FriendsComponent(
                 .onSuccess { friendship ->
                     val friends = state.value.allUsers
                         .asSequence()
-                        .filter { mate -> friendship.any { friendship -> friendship.receiver == mate.email } }
-                        .map { it.mapToMate(isFriend = true, isRequested = false) }
+                        .filter { mate ->
+                            friendship.any { friendship ->
+                                friendship.receiver == mate.email || friendship.sender == mate.email
+                            }
+                        }
+                        .map {
+                            it.mapToMate(
+                                isFriend = true,
+                                isRequested = friendship.isContainsRequestedMate(it)
+                            )
+                        }
+                        .filter { internalMate ->
+                            config.email != internalMate.email
+                        }
                         .toImmutableList()
 
                     update { it.copy(friendsList = friends) }
@@ -96,6 +111,26 @@ internal class FriendsComponent(
                                 it.copy(
                                     requestedMates = state.value.requestedMates.plus(event.internalMate.uid)
                                 )
+                            }
+                        }.onFailure {
+                            snackEffect(it.snackState())
+                        }
+                }
+            }
+
+            is FriendsEvents.OnAcceptFriendship -> {
+                launchIO {
+                    requestFriends()
+                        .onSuccess { friendship ->
+                            friendship.first {
+                                it.sender == event.internalMate.email && it.receiver == state.value.profileModel.email
+                            }.let {
+                                acceptFriendship(it.id)
+                                    .onSuccess {
+                                        snackEffect(SnackState.success(it))
+                                    }.onFailure { throwable ->
+                                        snackEffect(throwable.snackState())
+                                    }
                             }
                         }.onFailure {
                             snackEffect(it.snackState())

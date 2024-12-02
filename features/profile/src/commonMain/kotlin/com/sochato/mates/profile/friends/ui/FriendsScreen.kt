@@ -60,6 +60,9 @@ internal fun FriendsScreen(
                 friends = state.friendsList,
                 onMateClick = { mate ->
                     handleEvents(FriendsEvents.OnNavigateToMateProfile(mate))
+                },
+                onFriendshipAccept = {
+                    handleEvents(FriendsEvents.OnAcceptFriendship(it))
                 }
             )
         else

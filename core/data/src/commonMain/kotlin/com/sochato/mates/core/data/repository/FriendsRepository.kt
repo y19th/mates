@@ -2,6 +2,7 @@ package com.sochato.mates.core.data.repository
 
 import com.sochato.mates.core.data.api.MatesApi
 import com.sochato.mates.core.data.extension.fetchResponse
+import com.sochato.mates.core.data.model.request.AcceptFriendshipRequest
 import com.sochato.mates.core.data.model.request.FriendshipRequest
 import com.sochato.mates.core.data.model.response.FriendshipResponse
 import com.sochato.mates.core.data.model.response.MateResponse
@@ -17,6 +18,8 @@ interface FriendsRepository {
     suspend fun requestAllUsers(): Result<List<MateResponse>>
 
     suspend fun requestFriendship(request: FriendshipRequest): Result<String>
+
+    suspend fun acceptFriendship(request: AcceptFriendshipRequest): Result<String>
 }
 
 internal class FriendsRepositoryImpl(
@@ -31,9 +34,17 @@ internal class FriendsRepositoryImpl(
         client.get(urlString = MatesApi.Users).fetchResponse()
     }
 
-    override suspend fun requestFriendship(request: FriendshipRequest): Result<String> = runCatching {
-        client.post(urlString = MatesApi.RequestFriendship) {
-            setBody(request)
-        }.fetchResponse()
-    }
+    override suspend fun requestFriendship(request: FriendshipRequest): Result<String> =
+        runCatching {
+            client.post(urlString = MatesApi.RequestFriendship) {
+                setBody(request)
+            }.fetchResponse()
+        }
+
+    override suspend fun acceptFriendship(request: AcceptFriendshipRequest): Result<String> =
+        runCatching {
+            client.post(urlString = MatesApi.AcceptFriendship) {
+                setBody(request)
+            }.fetchResponse()
+        }
 }

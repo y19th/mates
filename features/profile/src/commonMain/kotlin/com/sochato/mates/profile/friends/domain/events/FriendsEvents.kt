@@ -12,4 +12,6 @@ internal sealed interface FriendsEvents: BaseEvents {
     data class OnNavigateToMateProfile(val internalMate: InternalMate): FriendsEvents
 
     data class OnRequestFriendship(val internalMate: InternalMate): FriendsEvents
+
+    data class OnAcceptFriendship(val internalMate: InternalMate): FriendsEvents
 }

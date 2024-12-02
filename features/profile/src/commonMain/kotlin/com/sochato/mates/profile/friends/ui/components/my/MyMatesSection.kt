@@ -17,7 +17,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun MyMatesSection(
     friends: ImmutableList<InternalMate>,
-    onMateClick: (InternalMate) -> Unit
+    onMateClick: (InternalMate) -> Unit,
+    onFriendshipAccept: (InternalMate) -> Unit
 ) {
     LazyColumn {
         item {
@@ -39,6 +40,9 @@ internal fun MyMatesSection(
                     friend = friend,
                     onClick = {
                         onMateClick(friend)
+                    },
+                    onFriendshipAccept = {
+                        onFriendshipAccept(friend)
                     }
                 )
 

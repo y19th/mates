@@ -69,11 +69,18 @@ internal fun LazyItemScope.MateItem(
 
             VerticalSpacer(height = 4.dp)
 
-            TextRegular(
-                text = "был в сети недавно",
-                fontSize = 13.sp,
-                color = Color(0xFF7B7B7B)
-            )
+            if (internalMate.isRequested)
+                TextRegular(
+                    text = "запрос отправлен",
+                    fontSize = 13.sp,
+                    color = Color(0xFF7B7B7B)
+                )
+            else
+                TextRegular(
+                    text = "был в сети недавно",
+                    fontSize = 13.sp,
+                    color = Color(0xFF7B7B7B)
+                )
         }
 
         Spacer(

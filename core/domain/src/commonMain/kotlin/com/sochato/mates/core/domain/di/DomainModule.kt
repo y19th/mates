@@ -4,6 +4,7 @@ import com.sochato.mates.core.data.extension.authorizedClient
 import com.sochato.mates.core.domain.models.WrummyDispatchers
 import com.sochato.mates.core.domain.use_cases.EraseBearerTokenUseCase
 import com.sochato.mates.core.domain.use_cases.LogoutUseCase
+import com.sochato.mates.core.domain.use_cases.friends.AcceptFriendshipUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestAllUsersUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestFriendsUseCase
 import com.sochato.mates.core.domain.use_cases.friends.RequestFriendshipUseCase
@@ -44,6 +45,7 @@ val domainModule = module {
     factoryOf(::RequestFriendsUseCase)
     factoryOf(::RequestAllUsersUseCase)
     factoryOf(::RequestFriendshipUseCase)
+    factoryOf(::AcceptFriendshipUseCase)
     factory {
         EraseBearerTokenUseCase(
             dispatchers = get(),

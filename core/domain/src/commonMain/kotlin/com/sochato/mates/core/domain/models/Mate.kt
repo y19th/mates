@@ -5,5 +5,6 @@ data class Mate(
     val email: String,
     val nickname: String,
     val matesPoints: Int,
-    val profilePicture: String?
+    val profilePicture: String?,
+    val status: FriendshipStatus = FriendshipStatus.StandardUnknown
 )
