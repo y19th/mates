@@ -1,8 +1,12 @@
 package com.sochato.mates.core.data.api
 
+import com.sochato.mates.core.data.model.request.RefreshRequest
+import com.sochato.mates.core.data.repository.LoginRepository
+import com.sochato.mates.core.data.store.bearerTokenStorage
 import com.sochato.mates.core.util.local.LoggerLevel
 import com.sochato.mates.core.util.local.MatesSettings
 import com.sochato.mates.core.util.local.message
+import com.sochato.mates.core.util.models.Token
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.darwin.Darwin
 import io.ktor.client.plugins.HttpTimeout
@@ -17,6 +21,8 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.component.KoinComponent
+import org.koin.mp.KoinPlatform.getKoin
 
 internal actual val authorizedClient: HttpClient = HttpClient(Darwin) {
     install(HttpTimeout) {
@@ -32,8 +38,21 @@ internal actual val authorizedClient: HttpClient = HttpClient(Darwin) {
     install(Auth) {
         bearer {
             loadTokens {
-                MatesSettings.token.let {
-                    BearerTokens(it.access, it.refresh)
+                bearerTokenStorage.last()?.let { token ->
+                    BearerTokens(token.access, token.refresh)
+                }
+            }
+
+            refreshTokens {
+                (oldTokens?.refreshToken ?: bearerTokenStorage.last()?.refresh)?.let { refresh ->
+                    val result = LoginRepositoryProvider.refreshToken(refresh)
+                        .getOrNull()
+
+                    if (result != null)
+                        BearerTokens(result.access, result.refresh)
+                            .also { bearerTokenStorage.add(result) }
+                    else
+                        null
                 }
             }
         }
@@ -60,4 +79,13 @@ internal actual val authorizedClient: HttpClient = HttpClient(Darwin) {
         level = if (MatesSettings.properties.debug) LogLevel.INFO else LogLevel.NONE
     }
     //install(PlutoKtorInterceptor)
+}
+
+private class LoginRepositoryProvider : KoinComponent {
+
+    companion object {
+        suspend fun refreshToken(refresh: String): Result<Token> {
+            return getKoin().get<LoginRepository>().requestRefresh(RefreshRequest(refresh))
+        }
+    }
 }
